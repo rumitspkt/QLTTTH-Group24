@@ -29,7 +29,7 @@
 				<li><a href="${pageContext.request.contextPath}/admin/course"> <i
 						class="fas fa-calendar-o"></i>Course
 				</a></li>
-				<li><a href="${pageContext.request.contextPath}/admin/certficate"> <i
+				<li><a href="${pageContext.request.contextPath}/admin/certificate"> <i
 						class="fas fa-book"></i>Certificate
 				</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/notification"> <i

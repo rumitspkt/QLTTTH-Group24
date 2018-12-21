@@ -76,12 +76,12 @@
 								</div>
 								<div class="account-dropdown__body">
 									<div class="account-dropdown__item">
-										<a href="#"> <i class="zmdi zmdi-account"></i>Account
+										<a href="${pageContext.request.contextPath}/admin/profile"> <i class="zmdi zmdi-account"></i>Profile
 										</a>
 									</div>
 								</div>
 								<div class="account-dropdown__footer">
-									<a href="#"> <i class="zmdi zmdi-power"></i>Logout
+									<a href="${pageContext.request.contextPath}/"> <i class="zmdi zmdi-power"></i>Logout
 									</a>
 								</div>
 							</div>
