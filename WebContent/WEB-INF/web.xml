@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>QLTTTH-Group24</display-name>
+	<context-param>
+		<param-name>dbHost</param-name>
+		<param-value>localhost</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbPort</param-name>
+		<param-value>3306</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbName</param-name>
+		<param-value>QLTTTH_DB</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbUsername</param-name>
+		<param-value>root</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbPassword</param-name>
+		<param-value>root123123</param-value>
+	</context-param>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/jsp/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/jsp/404.jsp</location>
+	</error-page>
+</web-app>
