@@ -16,7 +16,7 @@ import commons.SuccessCodes;
 import daos.ContactDAO;
 import models.Contact;
 
-@WebServlet(name = "ContactServlet", urlPatterns = {"", "/contact/edit", "/contact/new", "/contact", "/contact/list", "/contact/delete", "/contact/test"})
+@WebServlet(name = "ContactServlet", urlPatterns = {"/contact/edit", "/contact/new", "/contact", "/contact/list", "/contact/delete", "/contact/test"})
 public class ContactServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class ContactServlet extends BaseServlet {
 		case "/contact/new":
 			create(request, response);
 			break;
-		case "/contact/list": case "/contact": case "":
+		case "/contact/list": case "/contact":
 			list(request, response);
 			break;
 		case "/contact/delete":
