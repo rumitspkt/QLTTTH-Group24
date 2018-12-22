@@ -14,7 +14,7 @@
 	</context-param>
 	<context-param>
 		<param-name>dbName</param-name>
-		<param-value>QLTTTH_DB</param-value>
+		<param-value>QLTTTH</param-value>
 	</context-param>
 	<context-param>
 		<param-name>dbUsername</param-name>
@@ -24,6 +24,16 @@
 		<param-name>dbPassword</param-name>
 		<param-value>root123123</param-value>
 	</context-param>
+
+	<servlet>
+		<servlet-name>PageHomeServlet</servlet-name>
+		<servlet-class>servlets.PageHomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PageHomeServlet</servlet-name>
+		<url-pattern></url-pattern>
+	</servlet-mapping>
+
 	<error-page>
 		<error-code>403</error-code>
 		<location>/jsp/403.jsp</location>

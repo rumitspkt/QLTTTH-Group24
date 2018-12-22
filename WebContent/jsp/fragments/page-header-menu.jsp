@@ -12,8 +12,8 @@
 				</ul>
 			</div>
 			<div class="float-right">
-				<a class="dn_btn" href="tel:+4400123654896">+440 012 3654 896</a> <a
-					class="dn_btn" href="mailto:support@colorlib.com">support@colorlib.com</a>
+				<a class="dn_btn" href="tel:+4400123654896">+84 934 869 973</a> <a
+					class="dn_btn" href="mailto:support@colorlib.com">support@techacademy.com</a>
 			</div>
 		</div>
 	</div>
@@ -21,8 +21,8 @@
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
-				<a class="navbar-brand logo_h" href="index.html"><img
-					src="images/logo.png" alt=""></a>
+				<a class="navbar-brand logo_h" href="${pageContext.request.contextPath}"><img
+					src="${pageContext.request.contextPath}/images/logo.png" alt=""></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,17 +35,17 @@
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto">
 						<li class="nav-item active"><a class="nav-link"
-							href="index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="courses.html">Course</a></li>
-						<li class="nav-item"><a class="nav-link" href="score.html">Score</a></li>
+							href="${pageContext.request.contextPath}">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/course">Course</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/score">Score</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="certification.html">Certification</a></li>
-						<li class="nav-item"><a class="nav-link" href="post.html">Post</a></li>
-						<li class="nav-item"><a class="nav-link" href="event.html">Event</a></li>
-						<li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+							href="${pageContext.request.contextPath}/certification">Certification</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/post">Post</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/event">Event</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/about">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a></li>
 					</ul>
-					<a href="login.html"
+					<a href="${pageContext.request.contextPath}/login"
 						class="ml-auto genric-btn info-border circle media">Sign In |
 						Sign Up</a>
 				</div>

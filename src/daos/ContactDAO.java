@@ -10,29 +10,18 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import bases.BaseDAO;
 import models.Contact;
 import utils.DatabaseManager;
 
-public class ContactDAO {
+public class ContactDAO extends BaseDAO {
 	private static final ContactDAO INSTANCE = new ContactDAO();
-    private DatabaseManager databaseManager;
 
     public static ContactDAO getInstance() {
         return INSTANCE;
     }
 
     private ContactDAO() {
-    }
-    
-    public void initDatabaseManager(ServletContext context) {
-    	if(databaseManager == null) {
-    		String dbUsername = context.getInitParameter("dbUsername");
-    		String dbPassword = context.getInitParameter("dbPassword");
-    		String dbHost = context.getInitParameter("dbHost");
-    		int dbPort = Integer.valueOf(context.getInitParameter("dbPort"));
-    		String dbName = context.getInitParameter("dbName");
-    		this.databaseManager = new DatabaseManager(dbUsername, dbPassword, dbName, dbHost, dbPort);
-    	}
     }
     
     public Contact getContact(final int contactId) {

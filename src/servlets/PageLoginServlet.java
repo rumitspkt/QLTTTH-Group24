@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import utils.HashUtil;
 
 @WebServlet(name = "PageLoginServlet", urlPatterns = { "/login" })
 public class PageLoginServlet extends BaseServlet {

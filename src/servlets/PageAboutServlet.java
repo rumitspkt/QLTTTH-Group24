@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
 
-public class PageHomeServlet extends BaseServlet {
+@WebServlet(name = "PageAboutServlet", urlPatterns = { "/about" })
+public class PageAboutServlet extends BaseServlet {
 
 	/**
 	 * 
@@ -24,7 +25,14 @@ public class PageHomeServlet extends BaseServlet {
 	@Override
 	public void handleGet(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		showView(request, response);
+		switch (getAction(request)) {
+		case "/about":
+			showView(request, response);
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -32,10 +40,10 @@ public class PageHomeServlet extends BaseServlet {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	public void showView(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			forward(request, response, "/jsp/page-home.jsp");
+			forward(request, response, "/jsp/page-about.jsp");
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		}

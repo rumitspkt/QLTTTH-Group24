@@ -26,7 +26,7 @@
 				<div class="login-wrap">
 					<div class="login-content">
 						<div class="login-logo">
-							<a href="#"> <img src="${pageContext.request.contextPath}/images/icon/logo.png" alt="CoolAdmin">
+							<a href="${pageContext.request.contextPath}/"> <img src="${pageContext.request.contextPath}/images/icon/logo.png" alt="CoolAdmin">
 							</a>
 						</div>
 						<div class="login-form">

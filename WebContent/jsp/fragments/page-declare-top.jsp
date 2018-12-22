@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="icon" href="${pageContext.request.contextPath}/images/icon/logo-mini.PNG" type="image/png">
+<title>Techacademy</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/linericon/style.css">
