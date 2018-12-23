@@ -105,7 +105,7 @@ CREATE TABLE posts (
 	PRIMARY KEY ( id ),
 	FOREIGN KEY ( lecturer ) REFERENCES users ( id ) 
 );
-CREATE TABLE classificaionOfPosts (
+CREATE TABLE classificationOfPosts (
 	id INT NOT NULL auto_increment,
 	post INT NOT NULL,
 	category INT NOT NULL,
@@ -118,4 +118,12 @@ CREATE TABLE attachFiles (
 	page VARCHAR ( 1000 ) NOT NULL,
 	url VARCHAR ( 255 ) NOT NULL,
 PRIMARY KEY ( id ) 
+);
+CREATE TABLE classificationOfCourses (
+	id INT NOT NULL auto_increment,
+	course INT NOT NULL,
+	category INT NOT NULL,
+	PRIMARY KEY ( id ),
+	FOREIGN KEY ( course ) REFERENCES courses ( id ),
+	FOREIGN KEY ( category ) REFERENCES categories ( id ) 
 );

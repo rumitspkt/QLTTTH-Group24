@@ -33,9 +33,6 @@ public class AdminPageServlet extends BaseServlet {
 		case "/admin/page/about":
 			showViewAboutPage(request, response);
 			break;
-		case "/admin/page/contact":
-			showViewContactPage(request, response);
-			break;
 		default:
 			break;
 		}
@@ -63,12 +60,13 @@ public class AdminPageServlet extends BaseServlet {
 		}
 	}
 	
-	private void showViewContactPage(HttpServletRequest request, HttpServletResponse response) {
+	private void editPage(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			forward(request, response, "/jsp/admin/admin-page-contact.jsp");
+			forward(request, response, "/jsp/admin/admin-page-about.jsp");
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 }

@@ -33,11 +33,11 @@
                             <form action="${pageContext.request.contextPath}/login" method="post">
                                 <div class="form-group">
                                     <label>User Name</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="User name">
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="User name" value="admin1">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password" value="123123">
                                 </div>
                                 <!-- <button class="au-btn au-btn--block au-btn--green m-t-20  m-b-20" type="submit">sign in</button> -->
                                 <button type="submit" class="btn btn-outline-primary btn-lg btn-block au-btn--small m-t-20">LOGIN</button>

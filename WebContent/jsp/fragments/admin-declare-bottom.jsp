@@ -31,5 +31,8 @@
 <script
 	src="${pageContext.request.contextPath}/vendor/toastr/toastr.min.js"></script>
 
+<!-- Include the Quill library -->
+<!-- <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script> -->
+
 <!-- Main JS -->
 <script src="${pageContext.request.contextPath}/js/main.js"></script>

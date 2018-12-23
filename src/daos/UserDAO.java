@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.jasper.compiler.SmapStratum;
+
 import bases.BaseDAO;
 import models.Contact;
 import models.User;
@@ -41,6 +43,28 @@ public class UserDAO extends BaseDAO {
         }
         return null;
     }
+	
+	public List<User> getUsers(String type){
+		try (Connection con = databaseManager.getConnection();
+	            PreparedStatement stmt = con.prepareStatement(
+	                    "SELECT id, type, username, hashPassword, firstName, lastName, birthDay, address, urlAvatar, email, maxim " +
+	                    "FROM users WHERE type = ? ORDER BY id ASC")) {
+
+				stmt.setString(1, type);
+				
+	            final List<User> users = new LinkedList<>();
+	            try (ResultSet rs = stmt.executeQuery()) {
+	                while (rs.next()) {
+	                    users.add(fromRow(rs));
+	                }
+	            }
+
+	            return users;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	}
 	
 	public List<User> getUsers(){
 		try (Connection con = databaseManager.getConnection();

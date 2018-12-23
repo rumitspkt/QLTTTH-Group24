@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jdt.internal.compiler.ast.ArrayQualifiedTypeReference;
 
+import com.google.protobuf.DescriptorProtos.FieldDescriptorProto.Type;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import bases.BaseServlet;
@@ -59,7 +60,7 @@ public class AdminAccountServlet extends BaseServlet {
 	}
 
 	private void showView(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("users", UserDAO.getInstance().getUsers());
+		request.setAttribute("users", UserDAO.getInstance().getUsers(TypeUser.LECTURER));
 		try {
 			forward(request, response, "/jsp/admin/admin-account.jsp");
 		} catch (IOException | ServletException e) {

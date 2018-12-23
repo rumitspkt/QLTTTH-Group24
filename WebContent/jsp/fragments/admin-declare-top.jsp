@@ -48,6 +48,10 @@
 <script
 	src="${pageContext.request.contextPath}/vendor/ckeditor/samples/js/sample.js"></script>
 
+<!-- Include Quill stylesheet -->
+<!-- <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet"> -->
+
+
 <!-- Main CSS -->
 <link href="${pageContext.request.contextPath}/css/theme.css"
 	rel="stylesheet" media="all" />

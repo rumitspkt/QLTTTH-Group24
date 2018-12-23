@@ -54,20 +54,20 @@
 						<div class="row m-b-80">
 							<div class="col-md-12">
 								<div class="card">
-									<div class="card-header">
-										<strong>Editor </strong>by CKEditor
-									</div>
-									<div class="card-body card-block">
-										<div id="editor"></div>
-									</div>
-									<div class="card-footer p-t-25 p-b-25">
-										<button type="submit" class="btn btn-primary btn-sm">
-											<i class="fa fa-dot-circle-o"></i> Submit
-										</button>
-										<button type="reset" class="btn btn-danger btn-sm">
-											<i class="fa fa-ban"></i> Reset
-										</button>
-									</div>
+										<div class="card-header">
+											<strong>Editor </strong>by CKEditor
+										</div>
+										<div class="card-body card-block">
+											<div id="editor"></div>
+										</div>
+										<div class="card-footer p-t-25 p-b-25">
+											<a href="javascript: post()" class="btn btn-primary btn-sm">
+												<i class="fa fa-dot-circle-o"></i> Submit
+											</a>
+											<a type="reset" class="btn btn-danger btn-sm">
+												<i class="fa fa-ban"></i> Reset
+											</a>
+										</div>
 								</div>
 							</div>
 
@@ -83,7 +83,25 @@
 	<%@ include file="/jsp/fragments/admin-declare-bottom.jsp"%>
 	<script>
 		initSample();
+		function post() {
+		      var method = "get"; 
+
+		      var form = document.createElement("form");
+		      form.setAttribute("method", method);
+		      form.setAttribute("action", "");
+
+		      var hiddenField = document.createElement("input");
+		      hiddenField.setAttribute("type", "hidden");
+		      hiddenField.setAttribute("name", "contents");
+		      hiddenField.setAttribute("value", "asdasd");
+
+		      form.appendChild(hiddenField);
+
+		      document.body.appendChild(form);
+		      form.submit();
+		    }
 	</script>
+
 	<%@ include file="/jsp/fragments/toastr.jsp"%>
 </body>
 </html>

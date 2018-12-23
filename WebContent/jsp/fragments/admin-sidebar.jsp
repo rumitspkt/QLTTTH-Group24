@@ -17,7 +17,6 @@
 					<ul class="list-unstyled navbar__sub-list js-sub-list">
 						<li><a href="${pageContext.request.contextPath}/admin/page/event">Event</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/page/about">About</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/page/contact">Contact us</a></li>
 					</ul></li>
 				<li class="has-sub"><a class="js-arrow" href="#"> <i
 						class="fas fa-edit"></i>Post
