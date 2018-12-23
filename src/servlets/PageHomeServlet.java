@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import models.User;
 
 public class PageHomeServlet extends BaseServlet {
 

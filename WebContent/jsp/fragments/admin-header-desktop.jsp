@@ -81,7 +81,7 @@
 									</div>
 								</div>
 								<div class="account-dropdown__footer">
-									<a href="${pageContext.request.contextPath}/"> <i class="zmdi zmdi-power"></i>Logout
+									<a href="${pageContext.request.contextPath}/logout"> <i class="zmdi zmdi-power"></i>Logout
 									</a>
 								</div>
 							</div>

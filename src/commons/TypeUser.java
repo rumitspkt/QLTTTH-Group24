@@ -1,8 +1,8 @@
 package commons;
 
 public class TypeUser {
-	public static String STUDENT = "STUDENT";
-	public static String LECTURER = "LECTURER";
-	public static String ADMIN = "ADMIN";
-	public static String SUPER_ADMIN = "SUPER_ADMIN";
+	public static final String STUDENT = "STUDENT";
+	public static final String LECTURER = "LECTURER";
+	public static final String ADMIN = "ADMIN";
+	public static final String SUPER_ADMIN = "SUPER_ADMIN";
 }

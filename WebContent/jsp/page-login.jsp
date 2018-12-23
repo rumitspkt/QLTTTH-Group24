@@ -30,23 +30,17 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="${pageContext.request.contextPath}/login" method="post">
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <label>User Name</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="User name">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
-                                <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                
-                                </div>
                                 <!-- <button class="au-btn au-btn--block au-btn--green m-t-20  m-b-20" type="submit">sign in</button> -->
-                                <button type="button" class="btn btn-outline-primary btn-lg btn-block au-btn--small m-t-20">LOGIN</button>
+                                <button type="submit" class="btn btn-outline-primary btn-lg btn-block au-btn--small m-t-20">LOGIN</button>
                         
                             </form>
                             <div class="p-4 text-center">
@@ -64,7 +58,8 @@
     </div>
 
    <%@ include file="/jsp/fragments/admin-declare-bottom.jsp" %>
-
+   <%@ include file="/jsp/fragments/toastr.jsp"%>
+   
 </body>
 
 </html>

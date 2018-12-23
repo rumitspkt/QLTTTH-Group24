@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <aside class="menu-sidebar d-none d-lg-block">
 	<div class="logo">
-		<a href="#"> <img src="${pageContext.request.contextPath}/images/icon/logo.png" alt="Techacademy" />
+		<a href="${pageContext.request.contextPath}/"> <img src="${pageContext.request.contextPath}/images/icon/logo.png" alt="Techacademy" />
 		</a>
 	</div>
 	<div class="menu-sidebar__content js-scrollbar1">

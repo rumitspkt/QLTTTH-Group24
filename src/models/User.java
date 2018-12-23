@@ -29,6 +29,15 @@ public class User {
 		this.email = email;
 		this.maxim = maxim;
 	}
+	
+	public User(String type, String username, String hashPassword, String email) {
+		super();
+		this.type = type;
+		this.username = username;
+		this.hashPassword = hashPassword;
+		this.email = email;
+	}
+
 	public int getId() {
 		return id;
 	}

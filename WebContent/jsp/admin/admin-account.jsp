@@ -56,7 +56,8 @@
 								<div class="table-data__tool">
 									<div class="table-data__tool-left"></div>
 									<div class="table-data__tool-right">
-										<button class="au-btn au-btn-icon au-btn--green au-btn--small">
+										<button class="au-btn au-btn-icon au-btn--green au-btn--small"
+											data-toggle="modal" data-target="#addModal">
 											<i class="zmdi zmdi-plus"></i>add
 										</button>
 
@@ -92,6 +93,72 @@
 			</div>
 			<!-- END MAIN CONTENT -->
 			<!-- END PAGE CONTAINER -->
+			<!-- modal medium -->
+			<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+				aria-labelledby="mediumModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="mediumModalLabel">Add New
+								Lecturer Account</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form
+							action="${pageContext.request.contextPath}/admin/account/new"
+							method="post" class="">
+							<div class="modal-body">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" id="username" name="username"
+											placeholder="User name" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" id="email" name="email"
+											placeholder="Email" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-asterisk"></i>
+										</div>
+										<input type="password" id="password" name="password"
+											placeholder="Password" class="form-control">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-asterisk"></i>
+										</div>
+										<input type="password" id="confirmPassword"
+											name="confirmPassword" placeholder="Confirm Password"
+											class="form-control">
+									</div>
+								</div>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary">Add</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<%@ include file="/jsp/fragments/admin-declare-bottom.jsp"%>

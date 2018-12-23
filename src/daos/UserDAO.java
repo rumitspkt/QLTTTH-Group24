@@ -14,6 +14,33 @@ import models.Contact;
 import models.User;
 
 public class UserDAO extends BaseDAO {
+	private static final UserDAO INSTANCE = new UserDAO();
+	
+	public static UserDAO getInstance() {
+        return INSTANCE;
+    }
+
+    private UserDAO() {
+    }
+    
+    public User getUser(final String username) {
+        try (Connection con = databaseManager.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT id, type, username, hashPassword, firstName, lastName, birthDay, address, urlAvatar, email, maxim "
+                    + "FROM users WHERE username = ? ")) {
+
+            stmt.setString(1, username);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return fromRow(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 	
 	public List<User> getUsers(){
 		try (Connection con = databaseManager.getConnection();

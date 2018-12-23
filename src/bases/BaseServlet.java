@@ -57,6 +57,15 @@ public abstract class BaseServlet extends HttpServlet implements InitServlet {
 		successes.add(message);
 		request.setAttribute("successes", successes);
 	}
+	
+	protected void setSuccessCode(HttpServletRequest request, List<String> messages) {
+		List<String> successes = (List<String>) request.getAttribute("successes");
+		if(successes == null) {
+			successes = new ArrayList<>();
+		}
+		successes.addAll(messages);
+		request.setAttribute("successes", successes);
+	}
 
 	protected void setErrorCode(HttpServletRequest request, String message) {
 		List<String> errors = (List<String>) request.getAttribute("errors");
@@ -65,6 +74,19 @@ public abstract class BaseServlet extends HttpServlet implements InitServlet {
 		}
 		errors.add(message);
 		request.setAttribute("errors", errors);
+	}
+	
+	protected void setErrorCode(HttpServletRequest request, List<String> messages) {
+		List<String> errors = (List<String>) request.getAttribute("errors");
+		if(errors == null) {
+			errors = new ArrayList<>();
+		}
+		errors.addAll(messages);
+		request.setAttribute("errors", errors);
+	}
+	
+	protected void validate() {
+		
 	}
 
 }

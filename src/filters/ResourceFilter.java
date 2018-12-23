@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class ResourceFilter
  */
-@WebFilter(urlPatterns = { "/jsp/*" ,"/store/*" })
 public class ResourceFilter implements Filter {
 
     /**
@@ -34,6 +33,7 @@ public class ResourceFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		System.out.println("resource filter");
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest requestHttp = (HttpServletRequest) request;

@@ -15,16 +15,12 @@ public class MapUtil {
 				stringBuilder.append("&");
 			}
 			String[] values = map.get(key);
-			try {
-				for (String value : values) {
-					stringBuilder.append((key != null ? URLEncoder.encode(key, "UTF-8") : ""));
-					stringBuilder.append("=");
-					stringBuilder.append(value != null ? URLEncoder.encode(value, "UTF-8") : "");
-				}
-
-			} catch (UnsupportedEncodingException e) {
-				throw new RuntimeException("This method requires UTF-8 encoding support", e);
+			for (String value : values) {
+				stringBuilder.append((key != null ? key : ""));
+				stringBuilder.append("=");
+				stringBuilder.append(value != null ? value : "");
 			}
+
 		}
 
 		return stringBuilder.toString();
