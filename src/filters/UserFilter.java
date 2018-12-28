@@ -20,7 +20,7 @@ public class UserFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
-		System.out.println("user filter");
+//		System.out.println("user filter");
 		// TODO Auto-generated method stub
 		HttpServletRequest requestHttp = (HttpServletRequest) arg0;
 		HttpServletResponse responseHttp = (HttpServletResponse) arg1;

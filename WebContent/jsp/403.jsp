@@ -40,7 +40,7 @@
 			</div>
 			<h1>oops!</h1>
 			<h2>Error 403 : You don't have permission to access</h2>
-			<a onclick="history.back(-1)" href="javascript:void(0);">go back</a>
+			<a href="${pageContext.request.contextPath}/">go home</a>
 			<div class="notfound-social">
 				<a href="#"><i class="fa fa-facebook"></i></a>
 				<a href="#"><i class="fa fa-twitter"></i></a>

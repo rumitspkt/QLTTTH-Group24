@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import commons.ErrorCodes;
+import commons.SuccessCodes;
+import commons.TypePage;
+import daos.PageDAO;
+import models.Page;
 
-@WebServlet(name="AdminPageServlet", urlPatterns= {"/admin/page/event", "/admin/page/about", "/admin/page/contact", "/admin/page"})
+@WebServlet(name="AdminPageServlet", urlPatterns= {"/admin/page/event", "/admin/page/about", "/admin/page/contact", "/admin/page", "/admin/page/event/edit", "/admin/page/about/edit"})
 public class AdminPageServlet extends BaseServlet {
 
 	/**
@@ -20,7 +25,7 @@ public class AdminPageServlet extends BaseServlet {
 	@Override
 	public void initServlet() {
 		// TODO Auto-generated method stub
-		
+		PageDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
@@ -28,10 +33,10 @@ public class AdminPageServlet extends BaseServlet {
 		// TODO Auto-generated method stub
 		switch (getAction(request)) {
 		case "/admin/page/event": case "/admin/page":
-			showViewEventPage(request, response);
+			showViewPage(request, response, TypePage.EVENT);
 			break;
 		case "/admin/page/about":
-			showViewAboutPage(request, response);
+			showViewPage(request, response, TypePage.ABOUT);
 			break;
 		default:
 			break;
@@ -41,28 +46,54 @@ public class AdminPageServlet extends BaseServlet {
 	@Override
 	public void handlePost(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		
+		switch (getAction(request)) {
+		case "/admin/page/event/edit":
+			editPage(request, response, TypePage.EVENT);
+			break;
+		case "/admin/page/about/edit":
+			editPage(request, response, TypePage.ABOUT);
+			break;
+		default:
+			handleGet(request, response);
+			break;
+		}
 	}
 	
-	private void showViewEventPage(HttpServletRequest request, HttpServletResponse response) {
+	private void showViewPage(HttpServletRequest request, HttpServletResponse response, String typePage) {
+		request.setAttribute("page", PageDAO.getInstance().getPage(typePage));
 		try {
-			forward(request, response, "/jsp/admin/admin-page-event.jsp");
+			switch (typePage) {
+			case TypePage.ABOUT:
+				forward(request, response, "/jsp/admin/admin-page-about.jsp");
+				break;
+			case TypePage.EVENT:
+				forward(request, response, "/jsp/admin/admin-page-event.jsp");
+				break;
+			default:
+				break;
+			}
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void showViewAboutPage(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			forward(request, response, "/jsp/admin/admin-page-about.jsp");
-		} catch (IOException | ServletException e) {
-			e.printStackTrace();
+	private void editPage(HttpServletRequest request, HttpServletResponse response, String typePage) {
+		String contents = request.getParameter("contents");
+		if(PageDAO.getInstance().updatePage(typePage, contents)) {
+			setSuccessCode(request, SuccessCodes.UPDATE_PAGE_SUCCESS);
+		}else {
+			setErrorCode(request, ErrorCodes.UPDATE_PAGE_ERROR);
 		}
-	}
-	
-	private void editPage(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			forward(request, response, "/jsp/admin/admin-page-about.jsp");
+			switch (typePage) {
+			case TypePage.ABOUT:
+				forward(request, response, "/admin/page/about");
+				break;
+			case TypePage.EVENT:
+				forward(request, response, "/admin/page/event");
+			default:
+				break;
+			}
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		}

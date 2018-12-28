@@ -25,14 +25,18 @@ public class CourseDAO extends BaseDAO{
     public Course getCourse(final int id) {
         try (Connection con = databaseManager.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "SELECT id, title, shortDescription, objective, eligibility, outline, schedules, totalSeat, availableSeat, fee, lecturer, date "
-                    + "FROM courses WHERE id = ? ")) {
+            		"SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category "
+                            + "FROM courses "
+                            + "JOIN users ON lecturer=users.id "
+                            + "JOIN classificationOfCourses ON classificationOfCourses.course=courses.id "
+                            + "JOIN categories ON classificationOfCourses.category=categories.id "
+                            + "WHERE id = ?")) {
 
             stmt.setInt(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return fromRow(rs);
+                    return fromRowDetail(rs);
                 }
             }
         } catch (SQLException e) {
@@ -56,18 +60,89 @@ public class CourseDAO extends BaseDAO{
         		resultSet.getTimestamp("date")
         		);
     }
+    
+    private Course fromRowDetail(final ResultSet resultSet) throws SQLException {
+        return new Course(resultSet.getInt("id"),
+        		resultSet.getString("title"), 
+        		resultSet.getString("shortDescription"),
+        		resultSet.getString("objective"),
+        		resultSet.getString("eligibility"),
+        		resultSet.getString("outline"),
+        		resultSet.getString("schedules"),
+        		resultSet.getInt("totalSeat"),
+        		resultSet.getInt("availableSeat"),
+        		resultSet.getFloat("fee"),
+        		resultSet.getInt("lecturer"),
+        		resultSet.getTimestamp("date"),
+        		resultSet.getString("lecturerName"),
+        		resultSet.getString("category")
+        		);
+    }
 
    
     public List<Course> getCourses() {
         try (Connection con = databaseManager.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "SELECT id, title, shortDescription, objective, eligibility, outline, schedules, totalSeat, availableSeat, fee, lecturer, date " +
-                    "FROM courses ORDER BY id ASC")) {
+                    "SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category "
+                    + "FROM courses "
+                    + "JOIN users ON lecturer=users.id "
+                    + "JOIN classificationOfCourses ON classificationOfCourses.course=courses.id "
+                    + "JOIN categories ON classificationOfCourses.category=categories.id")) {
 
             final List<Course> courses = new LinkedList<>();
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                	courses.add(fromRow(rs));
+                	courses.add(fromRowDetail(rs));
+                }
+            }
+
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public List<Course> getCoursesByCategory(int category) {
+        try (Connection con = databaseManager.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category "
+                    + "FROM courses "
+                    + "JOIN users ON lecturer=users.id "
+                    + "JOIN classificationOfCourses ON classificationOfCourses.course=courses.id "
+                    + "JOIN categories ON classificationOfCourses.category=categories.id "
+                    + "WHERE categories.id=?")) {
+        	stmt.setInt(1, category);
+
+            final List<Course> courses = new LinkedList<>();
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                	courses.add(fromRowDetail(rs));
+                }
+            }
+
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public List<Course> getCoursesByLecturer(int lecturer) {
+        try (Connection con = databaseManager.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category "
+                    + "FROM courses "
+                    + "JOIN users ON lecturer=users.id "
+                    + "JOIN classificationOfCourses ON classificationOfCourses.course=courses.id "
+                    + "JOIN categories ON classificationOfCourses.category=categories.id "
+                    + "WHERE users.id=?")) {
+        	stmt.setInt(1, lecturer);
+
+            final List<Course> courses = new LinkedList<>();
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                	courses.add(fromRowDetail(rs));
                 }
             }
 

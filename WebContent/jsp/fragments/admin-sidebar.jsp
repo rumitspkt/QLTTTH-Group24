@@ -23,7 +23,7 @@
 				</a>
 					<ul class="list-unstyled navbar__sub-list js-sub-list">
 						<li><a href="${pageContext.request.contextPath}/admin/post/category">Categories</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/post/approve">Approve posts</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/post">Approve posts</a></li>
 					</ul></li>
 				<li><a href="${pageContext.request.contextPath}/admin/course"> <i
 						class="fas fa-calendar-o"></i>Course

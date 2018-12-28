@@ -15,6 +15,8 @@ public class Course {
 	private float fee;
 	private int lecturer;
 	private Timestamp date;
+	private String lecturerName;
+	private String category;
 	public Course(int id, String title, String shortDescription, String objective, String eligibility, String outline,
 			String schedules, int totalSeat, int availableSeat, float fee, int lecturer, Timestamp date) {
 		this.id = id;
@@ -30,6 +32,42 @@ public class Course {
 		this.lecturer = lecturer;
 		this.date = date;
 	}
+	
+	public Course(int id, String title, String shortDescription, String objective, String eligibility, String outline,
+			String schedules, int totalSeat, int availableSeat, float fee, int lecturer, Timestamp date,
+			String lecturerName, String category) {
+		this.id = id;
+		this.title = title;
+		this.shortDescription = shortDescription;
+		this.objective = objective;
+		this.eligibility = eligibility;
+		this.outline = outline;
+		this.schedules = schedules;
+		this.totalSeat = totalSeat;
+		this.availableSeat = availableSeat;
+		this.fee = fee;
+		this.lecturer = lecturer;
+		this.date = date;
+		this.lecturerName = lecturerName;
+		this.category = category;
+	}
+
+	public String getLecturerName() {
+		return lecturerName;
+	}
+
+	public void setLecturerName(String lecturerName) {
+		this.lecturerName = lecturerName;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public int getId() {
 		return id;
 	}

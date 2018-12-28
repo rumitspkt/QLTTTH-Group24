@@ -19,5 +19,9 @@ public class ErrorCodes {
 	
 	// login
 	public static final String USERNAME_OR_PASSWORD_WRONG = "USERNAME_OR_PASSWORD_WRONG"; 
+	public static final String UPDATE_PAGE_ERROR = "UPDATE_PAGE_ERROR"; 
+	public static final String CREATE_CATEGORY_ERROR = "CREATE_CATEGORY_ERROR"; 
+	public static final String DELETE_CATEGORY_ERROR = "DELETE_CATEGORY_ERROR"; 
+	public static final String APPROVE_POST_ERROR = "APPROVE_POST_ERROR"; 
 	
 }

@@ -12,6 +12,9 @@ public class Post {
 	private String summary;
 	private String content;
 	private String status;
+	private String category;
+	private String lecturerName;
+	
 	public Post(int id, String posterUrl, int lecturer, Timestamp date, int views, String title, String summary,
 			String content, String status) {
 		this.id = id;
@@ -24,6 +27,43 @@ public class Post {
 		this.content = content;
 		this.status = status;
 	}
+	
+	
+	
+	public Post(int id, String posterUrl, int lecturer, Timestamp date, int views, String title, String summary,
+			String content, String status, String category, String lecturerName) {
+		super();
+		this.id = id;
+		this.posterUrl = posterUrl;
+		this.lecturer = lecturer;
+		this.date = date;
+		this.views = views;
+		this.title = title;
+		this.summary = summary;
+		this.content = content;
+		this.status = status;
+		this.category = category;
+		this.lecturerName = lecturerName;
+	}
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getLecturerName() {
+		return lecturerName;
+	}
+
+	public void setLecturerName(String lecturerName) {
+		this.lecturerName = lecturerName;
+	}
+
 	public int getId() {
 		return id;
 	}
