@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import daos.MessageDAO;
 
 @WebServlet(name="AdminMessageServlet", urlPatterns= {"/admin/message"})
 public class AdminMessageServlet extends BaseServlet{
@@ -15,7 +16,7 @@ public class AdminMessageServlet extends BaseServlet{
 	@Override
 	public void initServlet() {
 		// TODO Auto-generated method stub
-		
+		MessageDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
@@ -38,6 +39,7 @@ public class AdminMessageServlet extends BaseServlet{
 	}
 	
 	private void showView(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("messages", MessageDAO.getInstance().getMessages());
 		try {
 			forward(request, response, "/jsp/admin/admin-message.jsp");
 		} catch (IOException | ServletException e) {

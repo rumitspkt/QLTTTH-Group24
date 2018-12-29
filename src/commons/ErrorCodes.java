@@ -31,5 +31,9 @@ public class ErrorCodes {
 	public static final String CREATE_NOTIFICATION_ERROR = "CREATE_NOTIFICATION_ERROR"; 
 	public static final String DELETE_NOTIFICATION_ERROR = "DELETE_NOTIFICATION_ERROR"; 
 	public static final String UPDATE_NOTIFICATION_ERROR = "UPDATE_NOTIFICATION_ERROR"; 
+	public static final String UPDATE_PROFILE_ERROR = "UPDATE_PROFILE_ERROR"; 
+	public static final String CHANGE_IMAGE_ERROR = "CHANGE_IMAGE_ERROR"; 
+	public static final String CHANGE_PASSWORD_ERROR = "CHANGE_PASSWORD_ERROR"; 
+	public static final String PASSWORD_WRONG = "PASSWORD_WRONG"; 
 	
 }

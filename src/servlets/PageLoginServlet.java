@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.core.ApplicationContext;
+
 import bases.BaseServlet;
 import commons.ErrorCodes;
 import commons.TypeUser;
+import daos.NotificationDAO;
 import daos.UserDAO;
 import models.User;
 import utils.HashUtil;
@@ -29,13 +32,14 @@ public class PageLoginServlet extends BaseServlet {
 	public void initServlet() {
 		// TODO Auto-generated method stub
 		UserDAO.getInstance().initDatabaseManager(getServletContext());
+		NotificationDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
 	public void handleGet(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		switch (getAction(request)) {
-		case "/login":
+		case "/login":	
 			User user = (User) request.getSession().getAttribute("user");
 			if (user != null) {
 				redirectUser(request, response, user.getType());
@@ -114,6 +118,7 @@ public class PageLoginServlet extends BaseServlet {
 				sendRedirect(request, response, "/");
 				break;
 			case TypeUser.LECTURER:
+				request.getSession().setAttribute("alerts", NotificationDAO.getInstance().getNotifications());
 				sendRedirect(request, response, "/lecturer");
 				break;
 			case TypeUser.ADMIN:

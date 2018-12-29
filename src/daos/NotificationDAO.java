@@ -37,7 +37,7 @@ public class NotificationDAO extends BaseDAO{
         try (Connection con = databaseManager.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                     "SELECT id, title, content, priority, date " +
-                    "FROM notifications ORDER BY id ASC")) {
+                    "FROM notifications ORDER BY date DESC")) {
 
             final List<Notification> notifications = new LinkedList<>();
             try (ResultSet rs = stmt.executeQuery()) {
