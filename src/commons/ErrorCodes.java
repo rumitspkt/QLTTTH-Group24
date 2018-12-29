@@ -23,5 +23,8 @@ public class ErrorCodes {
 	public static final String CREATE_CATEGORY_ERROR = "CREATE_CATEGORY_ERROR"; 
 	public static final String DELETE_CATEGORY_ERROR = "DELETE_CATEGORY_ERROR"; 
 	public static final String APPROVE_POST_ERROR = "APPROVE_POST_ERROR"; 
+	public static final String CREATE_COURSE_ERROR = "CREATE_COURSE_ERROR"; 
+	public static final String UPDATE_COURSE_ERROR = "UPDATE_COURSE_ERRORS"; 
+	public static final String DELETE_COURSE_ERROR = "DELETE_COURSE_ERROR"; 
 	
 }

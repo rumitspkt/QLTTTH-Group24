@@ -17,6 +17,7 @@ public class Course {
 	private Timestamp date;
 	private String lecturerName;
 	private String category;
+	private int categoryId;
 	public Course(int id, String title, String shortDescription, String objective, String eligibility, String outline,
 			String schedules, int totalSeat, int availableSeat, float fee, int lecturer, Timestamp date) {
 		this.id = id;
@@ -35,7 +36,7 @@ public class Course {
 	
 	public Course(int id, String title, String shortDescription, String objective, String eligibility, String outline,
 			String schedules, int totalSeat, int availableSeat, float fee, int lecturer, Timestamp date,
-			String lecturerName, String category) {
+			String lecturerName, String category, int categoryId) {
 		this.id = id;
 		this.title = title;
 		this.shortDescription = shortDescription;
@@ -50,6 +51,44 @@ public class Course {
 		this.date = date;
 		this.lecturerName = lecturerName;
 		this.category = category;
+		this.categoryId = categoryId;
+	}
+	
+	public Course(String title, String shortDescription, String objective, String eligibility, String outline,
+			String schedules, int totalSeat, float fee, int lecturer) {
+		this.title = title;
+		this.shortDescription = shortDescription;
+		this.objective = objective;
+		this.eligibility = eligibility;
+		this.outline = outline;
+		this.schedules = schedules;
+		this.totalSeat = totalSeat;
+		this.fee = fee;
+		this.lecturer = lecturer;
+	}
+	
+	public Course(int id, String title, String shortDescription, String objective, String eligibility, String outline,
+			String schedules, int totalSeat, float fee, int lecturer) {
+		this.id = id;
+		this.title = title;
+		this.shortDescription = shortDescription;
+		this.objective = objective;
+		this.eligibility = eligibility;
+		this.outline = outline;
+		this.schedules = schedules;
+		this.totalSeat = totalSeat;
+		this.fee = fee;
+		this.lecturer = lecturer;
+	}
+	
+	
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getLecturerName() {

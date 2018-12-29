@@ -18,8 +18,9 @@ import daos.CourseDAO;
 import daos.PostDAO;
 import daos.UserDAO;
 import models.Contact;
+import models.Course;
 
-@WebServlet(name="AdminCourseServlet", urlPatterns= {"/admin/course"})
+@WebServlet(name="AdminCourseServlet", urlPatterns= {"/admin/course", "/admin/course/new", "/admin/course/edit", "/admin/course/delete"})
 public class AdminCourseServlet extends BaseServlet{
 
 	@Override
@@ -48,13 +49,13 @@ public class AdminCourseServlet extends BaseServlet{
 		// TODO Auto-generated method stub
 		switch (getAction(request)) {
 		case "/admin/course/new":
-			showView(request, response);
+			create(request, response);
 			break;
-		case "/admin/course/update":
-			showView(request, response);
+		case "/admin/course/edit":
+			edit(request, response);
 			break;
 		case "/admin/course/delete":
-			showView(request, response);
+			delete(request, response);
 			break;
 		default:
 			handleGet(request, response);
@@ -86,20 +87,30 @@ public class AdminCourseServlet extends BaseServlet{
 	}
 	
 	private void create(HttpServletRequest request, HttpServletResponse response) {
-		String name = request.getParameter("name");
-		String phoneNumber = request.getParameter("phoneNumber");
+		String title = request.getParameter("title");
+		String shortDescription = request.getParameter("shortDescription");
+		String objective = request.getParameter("objective");
+		String eligibility = request.getParameter("eligibility");
+		String outline = request.getParameter("outline");
+		String schedules = request.getParameter("schedules");
+		int totalSeat = request.getParameter("totalSeat") != null ? Integer.valueOf(request.getParameter("totalSeat")) : 0;
+		int lecturer = request.getParameter("lecturer") != null ? Integer.valueOf(request.getParameter("lecturer")) : 0;
+		float fee = request.getParameter("fee") != null ? Integer.valueOf(request.getParameter("fee")) : 0f;
+		int categoryId = request.getParameter("categoryId") != null ? Integer.valueOf(request.getParameter("categoryId")) : 0;
 
-		Contact contact = new Contact(name, phoneNumber);
+		Course course = new Course(title, shortDescription, objective, eligibility, outline, schedules, totalSeat, fee, lecturer);
 
 		try {
-			if (ContactDAO.getInstance().storeContact(contact)) {
-				setSuccessCode(request, SuccessCodes.CREATE_CONTACT_SUCCESS);
-				forward(request, response, "/contact");
-			} else {
-				setErrorCode(request, ErrorCodes.CREATE_NEW_CONTACT_FAIL);
-				forward(request, response, "/contact");
+			int key = CourseDAO.getInstance().storeCourse(course);
+			if(key > 0) {
+				if(CourseDAO.getInstance().classifyCourse(key, categoryId)) {
+					setSuccessCode(request, SuccessCodes.CREATE_COURSE_SUCESS );
+					forward(request, response, "/admin/course");
+					return;
+				}
 			}
-
+			setErrorCode(request, ErrorCodes.CREATE_COURSE_ERROR);
+			forward(request, response, "/admin/course");
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		}
@@ -108,13 +119,20 @@ public class AdminCourseServlet extends BaseServlet{
 	private void delete(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.valueOf(request.getParameter("id"));
 
+		Course course = CourseDAO.getInstance().getCourse(id);
+		
 		try {
-			if (ContactDAO.getInstance().deleteContact(id)) {
-				setSuccessCode(request, SuccessCodes.DELETE_CONTACT_SUCCESS);
-				forward(request, response, "/contact");
-			} else {
-				setErrorCode(request, ErrorCodes.DELETE_CONTACT_FAIL);
-				forward(request, response, "/contact");
+			if(course.getAvailableSeat() > 0) {
+				setErrorCode(request, ErrorCodes.DELETE_COURSE_ERROR);
+				forward(request, response, "/admin/course");
+				return;
+			}
+			if(CourseDAO.getInstance().deleteClassification(id) && CourseDAO.getInstance().deleteCourse(id)) {
+				setSuccessCode(request, SuccessCodes.DELETE_COURSE_SUCCESS);
+				forward(request, response, "/admin/course");
+			}else {
+				setErrorCode(request, ErrorCodes.DELETE_COURSE_ERROR);
+				forward(request, response, "/admin/course");
 			}
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();
@@ -122,17 +140,27 @@ public class AdminCourseServlet extends BaseServlet{
 	}
 
 	private void edit(HttpServletRequest request, HttpServletResponse response) {
-		int id = Integer.valueOf(request.getParameter("id"));
-		String name = request.getParameter("name");
-		String phoneNumber = request.getParameter("phoneNumber");
+		int id = request.getParameter("id") != null ? Integer.valueOf(request.getParameter("id")) : 0;
+		String title = request.getParameter("title");
+		String shortDescription = request.getParameter("shortDescription");
+		String objective = request.getParameter("objective");
+		String eligibility = request.getParameter("eligibility");
+		String outline = request.getParameter("outline");
+		String schedules = request.getParameter("schedules");
+		int totalSeat = request.getParameter("totalSeat") != null ? Integer.valueOf(request.getParameter("totalSeat")) : 0;
+		int lecturer = request.getParameter("lecturer") != null ? Integer.valueOf(request.getParameter("lecturer")) : 0;
+		float fee = request.getParameter("fee") != null ? Float.valueOf(request.getParameter("fee")) : 0f;
+		int categoryId = request.getParameter("categoryId") != null ? Integer.valueOf(request.getParameter("categoryId")) : 0;
+
+		Course course = new Course(id, title, shortDescription, objective, eligibility, outline, schedules, totalSeat, fee, lecturer);
 
 		try {
-			if (ContactDAO.getInstance().updateContact(id, name, phoneNumber)) {
-				setSuccessCode(request, SuccessCodes.UPDATE_CONTACT_SUCCESS);
-				forward(request, response, "/contact");
+			if (CourseDAO.getInstance().updateCourse(course) && CourseDAO.getInstance().updateClassifyCourse(course.getId(), categoryId)) {
+				setSuccessCode(request, SuccessCodes.UPDATE_COURSE_SUCCESS);
+				forward(request, response, "/admin/course");
 			} else {
-				setErrorCode(request, ErrorCodes.UPDATE_CONTACT_FAIL);
-				forward(request, response, "/contact");
+				setErrorCode(request, ErrorCodes.UPDATE_COURSE_ERROR);
+				forward(request, response, "/admin/course");
 			}
 		} catch (IOException | ServletException e) {
 			e.printStackTrace();

@@ -122,6 +122,7 @@
 													<td hidden="hidden" class="model-lecturer">${course.lecturer}</td>
 													<td hidden="hidden" class="model-fee">${course.fee}</td>
 													<td hidden="hidden" class="model-outline">${course.outline}</td>
+													<td hidden="hidden" class="model-categoryId">${course.categoryId}</td>
 													<td>
 														<div class="table-data-feature">
 															<button modelId="${course.id}" class="button btn-edit"
@@ -256,7 +257,8 @@
 													class="form-control-sm form-control">
 													<option value="0">Select Lecturer</option>
 													<c:forEach items="${lecturers}" var="lecturer">
-														<option value="${lecturer.id}">${lecturer.firstName} ${lecturer.lastName}</option>
+														<option value="${lecturer.id}">${lecturer.firstName}
+															${lecturer.lastName}</option>
 													</c:forEach>
 												</select>
 											</div>
@@ -269,8 +271,28 @@
 												<div class="input-group-addon">
 													<i class="fa fa-usd"></i>
 												</div>
-												<input type="number" id="fee" name="fee"
-													placeholder="Fee" class="form-control">
+												<input type="number" step="0.01" id="fee" name="fee" placeholder="Fee"
+													class="form-control">
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-9">
+										<div class="form-group">
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-bars"></i>
+												</div>
+												<select name="categoryId" id="categoryId"
+													class="form-control-sm form-control">
+													<option value="0">Select Category</option>
+													<c:forEach items="${categories}" var="category">
+														<option value="${category.id}">${category.title}</option>
+													</c:forEach>
+												</select>
 											</div>
 										</div>
 
@@ -301,9 +323,11 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form  id="editModal" action="${pageContext.request.contextPath}/admin/course/edit"
+						<form id="editModal"
+							action="${pageContext.request.contextPath}/admin/course/edit"
 							method="post" class="">
 							<div class="modal-body">
+							<input id="id" name="id" hidden="hidden">
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-addon">
@@ -392,7 +416,8 @@
 													class="form-control-sm form-control">
 													<option value="0">Select Lecturer</option>
 													<c:forEach items="${lecturers}" var="lecturer">
-														<option value="${lecturer.id}">${lecturer.firstName} ${lecturer.lastName}</option>
+														<option value="${lecturer.id}">${lecturer.firstName}
+															${lecturer.lastName}</option>
 													</c:forEach>
 												</select>
 											</div>
@@ -405,8 +430,28 @@
 												<div class="input-group-addon">
 													<i class="fa fa-usd"></i>
 												</div>
-												<input type="number" id="fee" name="fee"
-													placeholder="Fee" class="form-control">
+												<input type="number" step="0.01" id="fee" name="fee" placeholder="Fee"
+													class="form-control">
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-9">
+										<div class="form-group">
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-bars"></i>
+												</div>
+												<select name="categoryId" id="categoryId"
+													class="form-control-sm form-control">
+													<option value="0">Select Category</option>
+													<c:forEach items="${categories}" var="category">
+														<option value="${category.id}">${category.title}</option> 
+													</c:forEach>
+												</select>
 											</div>
 										</div>
 
@@ -419,7 +464,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn btn-primary">Add</button>
+								<button type="submit" class="btn btn-primary">Edit</button>
 							</div>
 						</form>
 					</div>

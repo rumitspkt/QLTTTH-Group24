@@ -13,4 +13,7 @@ public class SuccessCodes {
 	public static final String CREATE_CATEGORY_SUCCESS = "CREATE_CATEGORY_SUCCESS";
 	public static final String DELETE_CATEGORY_SUCCESS = "DELETE_CATEGORY_SUCCESS";
 	public static final String APPROVE_POST_SUCCESS = "APPROVE_POST_SUCCESS";
+	public static final String CREATE_COURSE_SUCESS = "CREATE_COURSE_SUCESS";
+	public static final String UPDATE_COURSE_SUCCESS = "UPDATE_COURSE_SUCCESS";
+	public static final String DELETE_COURSE_SUCCESS = "DELETE_COURSE_SUCCESS";
 }
