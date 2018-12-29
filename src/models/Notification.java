@@ -21,6 +21,11 @@ public class Notification {
 		this.priority = priority;
 		this.date = date;
 	}
+	public Notification(String title, String content, String priority) {
+		this.title = title;
+		this.content = content;
+		this.priority = priority;
+	}
 	public int getId() {
 		return id;
 	}

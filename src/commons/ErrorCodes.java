@@ -26,5 +26,10 @@ public class ErrorCodes {
 	public static final String CREATE_COURSE_ERROR = "CREATE_COURSE_ERROR"; 
 	public static final String UPDATE_COURSE_ERROR = "UPDATE_COURSE_ERRORS"; 
 	public static final String DELETE_COURSE_ERROR = "DELETE_COURSE_ERROR"; 
+	public static final String CREATE_CERTIFICATION_ERROR = "CREATE_CERTIFICATION_ERROR"; 
+	public static final String UPDATE_CERTIFICATION_ERROR = "UPDATE_CERTIFICATION_ERROR"; 
+	public static final String CREATE_NOTIFICATION_ERROR = "CREATE_NOTIFICATION_ERROR"; 
+	public static final String DELETE_NOTIFICATION_ERROR = "DELETE_NOTIFICATION_ERROR"; 
+	public static final String UPDATE_NOTIFICATION_ERROR = "UPDATE_NOTIFICATION_ERROR"; 
 	
 }

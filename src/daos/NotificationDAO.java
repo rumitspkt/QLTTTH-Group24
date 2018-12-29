@@ -52,17 +52,36 @@ public class NotificationDAO extends BaseDAO{
             return null;
         }
     }
+    
+    public List<Notification> getNotifications(String priority) {
+        try (Connection con = databaseManager.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT id, title, content, priority, date " +
+                    "FROM notifications WHERE priority = ? ORDER BY id ASC")) {
+        	stmt.setString(1, priority);
+            final List<Notification> notifications = new LinkedList<>();
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                	notifications.add(fromRow(rs));
+                }
+            }
+
+            return notifications;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public boolean storeNotification(final Notification notification) {
         try (Connection con = databaseManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(
-                     "INSERT INTO notifications (title, content, priority, date) "
-                     + "VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                     "INSERT INTO notifications (title, content, priority) "
+                     + "VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, notification.getTitle());
             stmt.setString(2, notification.getContent());
-            stmt.setString(3, notification.getContent());
-            stmt.setTimestamp(4, notification.getDate());
+            stmt.setString(3, notification.getPriority());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
