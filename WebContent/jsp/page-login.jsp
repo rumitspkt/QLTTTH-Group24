@@ -33,7 +33,7 @@
                             <form action="${pageContext.request.contextPath}/login" method="post">
                                 <div class="form-group">
                                     <label>User Name</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="User name" value="admin1">
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="User name" value="lecturer1">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>

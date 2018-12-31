@@ -24,4 +24,7 @@ public class SuccessCodes {
 	public static final String UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 	public static final String CHANGE_IMAGE_SUCCESS = "CHANGE_IMAGE_SUCCESS";
 	public static final String CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
+	public static final String CREATE_POST_SUCCESS = "CREATE_POST_SUCCESS";
+	public static final String UPDATE_SCORE_SUCCESS = "UPDATE_SCORE_SUCCESS";
+	public static final String APPROVE_CERTIFICATE_SUCCESS = "APPROVE_CERTIFICATE_SUCCESS";
 }

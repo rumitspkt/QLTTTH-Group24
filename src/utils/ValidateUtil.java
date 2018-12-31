@@ -29,6 +29,7 @@ public class ValidateUtil {
 	}
 	
 	private String candidate;
+	private float candidateFloat;
 	private String candidateName;
 	private List<String> validationErrors;
 	
@@ -75,5 +76,25 @@ public class ValidateUtil {
 		return this;
 	}
 	
+	// validate float number
 	
+	public ValidateUtil candidateFloat(float object, String objectName) {
+		this.candidateFloat = object;
+		this.candidateName = objectName;
+		return this;
+	}
+	
+	public ValidateUtil validateLessOrEqualThan(float number) {
+		if(candidateFloat > number) {
+			validationErrors.add(generateError(ErrorCodes.IS_GREATER_THAN + number));
+		}
+		return this;
+	}
+	
+	public ValidateUtil validateGreaterOrEqualThan(float number) {
+		if(candidateFloat < number) {
+			validationErrors.add(generateError(ErrorCodes.IS_LESS_THAN + number));
+		}
+		return this;
+	}
 }

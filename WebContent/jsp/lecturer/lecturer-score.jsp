@@ -13,7 +13,7 @@
 <meta name="keywords" content="au theme template" />
 
 <!-- Title Page -->
-<title>Post</title>
+<title>Score results</title>
 
 <%@ include file="/jsp/fragments/admin-declare-top.jsp"%>
 </head>
@@ -41,7 +41,7 @@
 						<div class="row m-b-35">
 							<div class="col-md-12">
 								<div class="overview-wrap">
-									<h2 class="title-1">Certificates</h2>
+									<h2 class="title-1">Score results</h2>
 
 									<!--
                       <button class="au-btn au-btn-icon au-btn--blue">
@@ -58,7 +58,7 @@
 								<div class="table-data__tool">
 									<div class="table-data__tool-left">
 										<form
-											action="${pageContext.request.contextPath}/lecturer/certificate"
+											action="${pageContext.request.contextPath}/lecturer/score"
 											method="get" class="rs-select2--light rs-select2--md">
 											<select class="js-select2" name="course"
 												onchange="this.form.submit()">
@@ -101,40 +101,24 @@
 										<thead>
 											<tr>
 												<th>full name</th>
-												<th>enrolled date</th>
-												<th>certificate</th>
-												<th>received date</th>
+												<th>first score</th>
+												<th>second score</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${certificates}" var="certificate">
-												<tr class="tr-shadow model-row" modelId="${certificate.userId}">
-													<td class="model-fullName">${certificate.firstName}
-														${certificate.lastName}</td>
-													<td class="model-enrolledDate">${certificate.enrolledDate}</td>
-
-													<c:choose>
-														<c:when test="${certificate.certificateId == 0}">
-															<td class="model-title"><span class="status--denied">Not
-																	approved</span></td>
-														</c:when>
-														<c:otherwise>
-															<td class="model-title"><span
-																class="status--process">${certificate.title}</span></td>
-														</c:otherwise>
-													</c:choose>
-
-													<td class="model-receivedCertificateDate">${certificate.receivedCertificateDate}</td>
-													<td class="model-firstScore" hidden="hidden">${certificate.firstScore}</td>
-													<td class="model-secondScore" hidden="hidden">${certificate.secondScore}</td>
-													<td class="model-certificateId" hidden="hidden">${certificate.certificateId}</td>
-													<td class="model-enrollment" hidden="hidden">${certificate.enrollment}</td>
+											<c:forEach items="${scores}" var="score">
+												<tr class="tr-shadow model-row" modelId="${score.id}">
+													<td class="model-fullName">${score.firstName}
+														${score.lastName}</td>
+													<td class="model-firstScore">${score.firstScore}</td>
+													<td class="model-secondScore">${score.secondScore}</td>
+													<td class="model-enrollment" hidden="hidden">${score.enrollment}</td>
 													<td>
 														<div class="table-data-feature">
-															<button modelId="${certificate.userId}" class="item btn-edit"
+															<button modelId="${score.id}" class="item btn-edit"
 																data-toggle="modal" data-target="#editModal"
-																data-placement="top" title="Approve">
-																<i class="zmdi zmdi-assignment"></i>
+																data-placement="top" title="Edit">
+																<i class="zmdi zmdi-border-color"></i>
 															</button>
 														</div>
 													</td>
@@ -159,14 +143,14 @@
 					<div class="modal-content">
 
 						<div class="modal-header">
-							<h5 class="modal-title" id="scrollmodalLabel">Certificate</h5>
+							<h5 class="modal-title" id="scrollmodalLabel">Score</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<form id="editModal"
-							action="${pageContext.request.contextPath}/lecturer/certificate/approve"
+							action="${pageContext.request.contextPath}/lecturer/score/edit"
 							method="post" class="">
 							<div class="modal-body">
 								<input name="enrollment" id="enrollment" hidden="hidden" /> <input
@@ -185,7 +169,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-check-circle"> First Score</i>
 											</div>
-											<input type="number" step="0.1" id="firstScore" disabled="disabled"
+											<input type="number" step="0.1" id="firstScore"
 												name="firstScore" placeholder="First Score"
 												class="form-control" />
 										</div>
@@ -196,7 +180,7 @@
 											<div class="input-group-addon">
 												<i class="fa  fa-check-circle"> Second Score</i>
 											</div>
-											<input type="number" step="0.1" id="secondScore" disabled="disabled"
+											<input type="number" step="0.1" id="secondScore"
 												name="secondScore" placeholder="Second Score"
 												class="form-control" />
 										</div>
@@ -204,30 +188,11 @@
 
 								</div>
 
-								<div class="row">
-									<div class="col-9">
-										<div class="form-group">
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-bars"> Select Certificate</i>
-												</div>
-												<select name="certificate" id="certificate"
-													class="form-control">
-													<c:forEach items="${typeOfCertificates}" var="type">
-														<option value="${type.id}">${type.title}</option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
-
-									</div>
-								</div>
-
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Cancel</button>
-								<button type="submit" class="btn btn-primary">Approve</button>
+								<button type="submit" class="btn btn-primary">Edit</button>
 							</div>
 						</form>
 					</div>
@@ -239,7 +204,7 @@
 	<%@ include file="/jsp/fragments/toastr.jsp"%>
 	<!-- custom JS -->
 	<script
-		src="${pageContext.request.contextPath}/js/custom/lecturer-certificate.js"></script>
+		src="${pageContext.request.contextPath}/js/custom/lecturer-score.js"></script>
 </body>
 </html>
 <!-- end document -->

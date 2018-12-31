@@ -30,7 +30,8 @@ public class ScoreDAO extends BaseDAO{
         		resultSet.getTimestamp("birthDay"),
         		resultSet.getString("address"),
         		resultSet.getFloat("firstScore"),
-        		resultSet.getFloat("secondScore")
+        		resultSet.getFloat("secondScore"),
+        		resultSet.getInt("enrollmentId")
         		);
     }
 
@@ -38,7 +39,7 @@ public class ScoreDAO extends BaseDAO{
     public List<Score> getScoreByCourse(int id) {
         try (Connection con = databaseManager.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-	                    "SELECT users.id,users.firstName,users.lastName,users.birthDay,users.address,scores.firstScore,scores.secondScore "
+	                    "SELECT users.id,users.firstName,users.lastName,users.birthDay,users.address,scores.firstScore,scores.secondScore, enrollments.id as enrollmentId "
 	                    + "FROM users INNER JOIN enrollments ON users.id=enrollments.student INNER JOIN scores ON enrollments.id=scores.enrollment "
 	                    + "WHERE enrollments.course = ? ORDER BY users.firstName")) {
 
@@ -73,14 +74,14 @@ public class ScoreDAO extends BaseDAO{
         }
     }
     
-    public boolean updateScore(final int id, final float firstScore, final float secondScore) {
+    public boolean updateScore(final int enrollment, final float firstScore, final float secondScore) {
     	try(Connection con = databaseManager.getConnection();
         		PreparedStatement stmt = con.prepareStatement(
-                        "UPDATE scores SET firstScore = ?, secondScore = ? where id = ?")) {
+                        "UPDATE scores SET firstScore = ?, secondScore = ? where enrollment = ?")) {
 
                stmt.setFloat(1, firstScore);
                stmt.setFloat(2, secondScore);
-               stmt.setInt(3, id);
+               stmt.setInt(3, enrollment);
                return stmt.executeUpdate() > 0;
         	} catch (SQLException e) {
         		e.printStackTrace();

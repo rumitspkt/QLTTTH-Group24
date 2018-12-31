@@ -59,8 +59,8 @@
 												<i class="zmdi zmdi-account-o"></i>
 											</div>
 											<div class="text">
-												<h2>10368</h2>
-												<span>users (20 lecturers)</span>
+												<h2>${info.totalUser}</h2>
+												<span>users (${info.totalLecturer} lecturers)</span>
 											</div>
 										</div>
 										<div class="overview-chart">
@@ -77,7 +77,7 @@
 												<i class="zmdi zmdi-edit"></i>
 											</div>
 											<div class="text">
-												<h2>388,688</h2>
+												<h2>${info.totalPost}</h2>
 												<span>total posts</span>
 											</div>
 										</div>
@@ -95,7 +95,7 @@
 												<i class="zmdi zmdi-calendar-note"></i>
 											</div>
 											<div class="text">
-												<h2>1,086</h2>
+												<h2>${info.totalTypeCertificate}</h2>
 												<span>type of certificates</span>
 											</div>
 										</div>
@@ -113,7 +113,7 @@
 												<i class="zmdi zmdi-money"></i>
 											</div>
 											<div class="text">
-												<h2>1,060,386</h2>
+												<h2>${info.totalEarnings}</h2>
 												<span>total earnings</span>
 											</div>
 										</div>
@@ -132,7 +132,7 @@
 										style="background-image: url('images/bg-title-01.jpg');">
 										<div class="bg-overlay bg-overlay--blue"></div>
 										<h3>
-											<i class="zmdi zmdi-account-calendar"></i>26 April, 2018
+											<i class="zmdi zmdi-account-calendar"></i>Todos
 										</h3>
 										<button class="au-btn-plus">
 											<i class="zmdi zmdi-plus"></i>
@@ -140,13 +140,13 @@
 									</div>
 									<div class="au-task js-list-load">
 										<div class="au-task__title">
-											<p>Tasks for John Doe</p>
+											<p>Tasks for ${sessionScope.user.firstName} ${sessionScope.user.lastName}</p>
 										</div>
 										<div class="au-task-list js-scrollbar3">
 											<div class="au-task__item au-task__item--danger">
 												<div class="au-task__item-inner">
 													<h5 class="task">
-														<a href="#">Meeting about plan for Admin Template 2018</a>
+														<a href="#">Create new type of certificate</a>
 													</h5>
 													<span class="time">10:00 AM</span>
 												</div>
@@ -154,7 +154,7 @@
 											<div class="au-task__item au-task__item--warning">
 												<div class="au-task__item-inner">
 													<h5 class="task">
-														<a href="#">Create new task for Dashboard</a>
+														<a href="#">Notify about Tet Holiday</a>
 													</h5>
 													<span class="time">11:00 AM</span>
 												</div>
@@ -162,7 +162,7 @@
 											<div class="au-task__item au-task__item--primary">
 												<div class="au-task__item-inner">
 													<h5 class="task">
-														<a href="#">Meeting about plan for Admin Template 2018</a>
+														<a href="#">Meeting about plan for class</a>
 													</h5>
 													<span class="time">02:00 PM</span>
 												</div>
@@ -170,7 +170,7 @@
 											<div class="au-task__item au-task__item--success">
 												<div class="au-task__item-inner">
 													<h5 class="task">
-														<a href="#">Create new task for Dashboard</a>
+														<a href="#">Create new course</a>
 													</h5>
 													<span class="time">03:30 PM</span>
 												</div>
@@ -178,7 +178,7 @@
 											<div class="au-task__item au-task__item--danger js-load-item">
 												<div class="au-task__item-inner">
 													<h5 class="task">
-														<a href="#">Meeting about plan for Admin Template 2018</a>
+														<a href="#">Meeting about plan for Android Lecturer</a>
 													</h5>
 													<span class="time">10:00 AM</span>
 												</div>
@@ -187,7 +187,7 @@
 												class="au-task__item au-task__item--warning js-load-item">
 												<div class="au-task__item-inner">
 													<h5 class="task">
-														<a href="#">Create new task for Dashboard</a>
+														<a href="#">Read message </a>
 													</h5>
 													<span class="time">11:00 AM</span>
 												</div>
@@ -206,7 +206,7 @@
 									<h3 class="title-3">task progress</h3>
 									<div class="au-skill-container">
 										<div class="au-progress">
-											<span class="au-progress__title">Web Design</span>
+											<span class="au-progress__title">Read message</span>
 											<div class="au-progress__bar">
 												<div class="au-progress__inner js-progressbar-simple"
 													role="progressbar" data-transitiongoal="90">
@@ -215,7 +215,7 @@
 											</div>
 										</div>
 										<div class="au-progress">
-											<span class="au-progress__title">HTML5/CSS3</span>
+											<span class="au-progress__title">Approve post</span>
 											<div class="au-progress__bar">
 												<div class="au-progress__inner js-progressbar-simple"
 													role="progressbar" data-transitiongoal="85">
@@ -224,7 +224,7 @@
 											</div>
 										</div>
 										<div class="au-progress">
-											<span class="au-progress__title">WordPress</span>
+											<span class="au-progress__title">Review course</span>
 											<div class="au-progress__bar">
 												<div class="au-progress__inner js-progressbar-simple"
 													role="progressbar" data-transitiongoal="95">
@@ -233,7 +233,7 @@
 											</div>
 										</div>
 										<div class="au-progress">
-											<span class="au-progress__title">Support</span>
+											<span class="au-progress__title">Reply comment</span>
 											<div class="au-progress__bar">
 												<div class="au-progress__inner js-progressbar-simple"
 													role="progressbar" data-transitiongoal="95">

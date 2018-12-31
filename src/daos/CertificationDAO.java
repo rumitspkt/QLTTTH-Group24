@@ -27,13 +27,17 @@ public class CertificationDAO extends BaseDAO {
     }
     
     private Certification fromRowMoreInfo(final ResultSet resultSet) throws SQLException {
-        return new Certification(resultSet.getInt("id"), 
+        return new Certification(resultSet.getInt("userId"), 
         		resultSet.getString("firstName"), 
         		resultSet.getString("lastName"),
-        		resultSet.getTimestamp("birthDay"),
+        		resultSet.getTimestamp("enrolledDate"),
         		resultSet.getString("address"),
         		resultSet.getString("title"),
-        		resultSet.getTimestamp("receivedCertificateDate")
+        		resultSet.getTimestamp("receivedCertificateDate"),
+        		resultSet.getFloat("firstScore"),
+        		resultSet.getFloat("secondScore"),
+        		resultSet.getInt("certificateId"),
+        		resultSet.getInt("enrollment")
         		);
     }
 
@@ -61,8 +65,8 @@ public class CertificationDAO extends BaseDAO {
     public List<Certification> getCertificationsByCourse(int id) {
         try (Connection con = databaseManager.getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "SELECT users.id,users.firstName,users.lastName,users.birthDay,users.address, certificates.title, enrollments.receivedCertificateDate "
-                    + "FROM users INNER JOIN enrollments ON users.id=enrollments.student INNER JOIN certificates ON enrollments.certificate=certificates.id "
+                    "SELECT users.id as userId,users.firstName,users.lastName,enrolledDate,users.address, certificates.title, enrollments.receivedCertificateDate, scores.firstScore, scores.secondScore, certificates.id as certificateId, enrollments.id as enrollment "
+                    + "FROM users INNER JOIN enrollments ON users.id=enrollments.student INNER JOIN certificates ON enrollments.certificate=certificates.id INNER JOIN scores ON enrollments.id=scores.enrollment "
                     + "WHERE enrollments.course= ? ORDER BY users.firstName"
             		)) {
         	stmt.setInt(1, id);
@@ -122,5 +126,19 @@ public class CertificationDAO extends BaseDAO {
         		return false;
         	}
     }
+
+	public boolean approve(int enrollment, int certificate) {
+		try(Connection con = databaseManager.getConnection();
+        		PreparedStatement stmt = con.prepareStatement(
+                        "UPDATE enrollments SET certificate = ?, receivedCertificateDate = CURRENT_TIMESTAMP where id = ?")) {
+
+               stmt.setInt(1, certificate);
+               stmt.setInt(2, enrollment);
+               return stmt.executeUpdate() > 0;
+        	} catch (SQLException e) {
+        		e.printStackTrace();
+        		return false;
+        	}
+	}
 
 }

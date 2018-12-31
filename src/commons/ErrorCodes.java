@@ -35,5 +35,9 @@ public class ErrorCodes {
 	public static final String CHANGE_IMAGE_ERROR = "CHANGE_IMAGE_ERROR"; 
 	public static final String CHANGE_PASSWORD_ERROR = "CHANGE_PASSWORD_ERROR"; 
 	public static final String PASSWORD_WRONG = "PASSWORD_WRONG"; 
+	public static final String CREATE_POST_ERROR = "CREATE_POST_ERROR"; 
+	public static final String UPDATE_SCORE_ERROR = "UPDATE_SCORE_ERROR"; 
+	public static final String IS_GREATER_THAN = "IS_GREATER_THAN_"; 
+	public static final String APPROVE_CERTIFICATE_ERROR = "APPROVE_CERTIFICATE_ERROR"; 
 	
 }

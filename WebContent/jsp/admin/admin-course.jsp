@@ -254,7 +254,7 @@
 													<i class="fa fa-user"></i>
 												</div>
 												<select name="lecturer" id="lecturer"
-													class="form-control-sm form-control">
+													class="form-control">
 													<option value="0">Select Lecturer</option>
 													<c:forEach items="${lecturers}" var="lecturer">
 														<option value="${lecturer.id}">${lecturer.firstName}
@@ -287,7 +287,7 @@
 													<i class="fa fa-bars"></i>
 												</div>
 												<select name="categoryId" id="categoryId"
-													class="form-control-sm form-control">
+													class="form-control">
 													<option value="0">Select Category</option>
 													<c:forEach items="${categories}" var="category">
 														<option value="${category.id}">${category.title}</option>

@@ -11,8 +11,9 @@ public class Score {
 	private Float firstScore;
 	private Float secondScore;
 	private int enrollment;
+	
 	public Score(int id, String firstName, String lastName, Timestamp birthDay, String address, Float firstScore,
-			Float secondScore) {
+			Float secondScore, int enrollment) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -20,6 +21,7 @@ public class Score {
 		this.address = address;
 		this.firstScore = firstScore;
 		this.secondScore = secondScore;
+		this.enrollment = enrollment;
 	}
 	
 	

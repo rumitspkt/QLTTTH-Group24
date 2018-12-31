@@ -222,21 +222,38 @@ public class PostDAO extends BaseDAO {
 	
 	
 
-	public boolean storePost(final Post post) {
+	public int storePost(final Post post) {
 		try (Connection con = databaseManager.getConnection();
 				PreparedStatement stmt = con.prepareStatement(
-						"INSERT INTO post (posterUrl, lecturer, date, views, title, , summary, content, status) "
-								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+						"INSERT INTO posts (posterUrl, lecturer, title, summary, content) "
+								+ "VALUES (?, ?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS)) {
 
 			stmt.setString(1, post.getPosterUrl());
 			stmt.setInt(2, post.getLecturer());
-			stmt.setTimestamp(3, post.getDate());
-			stmt.setInt(4, post.getViews());
-			stmt.setString(5, post.getTitle());
-			stmt.setString(6, post.getSummary());
-			stmt.setString(7, post.getContent());
-			stmt.setString(8, post.getStatus());
+			stmt.setString(3, post.getTitle());
+			stmt.setString(4, post.getSummary());
+			stmt.setString(5, post.getContent());
+			stmt.executeUpdate();
+			int key = -1;
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				key = generatedKeys.getInt(1);
+			}
+			return key;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	public boolean classifyPost(final int post, final int category) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con
+						.prepareStatement("INSERT INTO classificationOfPosts (post,category) VALUES (?,?)")) {
+
+			stmt.setInt(1, post);
+			stmt.setInt(2, category);
 			return stmt.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();

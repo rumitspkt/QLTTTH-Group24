@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import daos.DashboardDAO;
 
 @WebServlet(name = "AdminDashboardServlet", urlPatterns = { "/admin", "/admin/dashboard" })
 public class AdminDashboardServlet extends BaseServlet {
@@ -20,6 +21,7 @@ public class AdminDashboardServlet extends BaseServlet {
 	@Override
 	public void initServlet() {
 		// TODO Auto-generated method stub
+		DashboardDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
@@ -43,6 +45,8 @@ public class AdminDashboardServlet extends BaseServlet {
 	}
 	
 	public void showView(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("info", DashboardDAO.getInstance().summarize());
+		
 		try {
 			forward(request, response, "/jsp/admin/admin-dashboard.jsp");
 		} catch (IOException | ServletException e) {

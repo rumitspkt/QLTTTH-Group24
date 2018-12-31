@@ -16,6 +16,7 @@ import commons.ErrorCodes;
 import commons.TypeUser;
 import daos.NotificationDAO;
 import daos.UserDAO;
+import models.Notification;
 import models.User;
 import utils.HashUtil;
 import utils.ValidateUtil;
@@ -118,7 +119,9 @@ public class PageLoginServlet extends BaseServlet {
 				sendRedirect(request, response, "/");
 				break;
 			case TypeUser.LECTURER:
-				request.getSession().setAttribute("alerts", NotificationDAO.getInstance().getNotifications());
+				List<Notification> notifications = NotificationDAO.getInstance().getNotifications();
+				request.getSession().setAttribute("alerts", notifications);
+				request.getSession().setAttribute("quantityAlert", notifications.size());
 				sendRedirect(request, response, "/lecturer");
 				break;
 			case TypeUser.ADMIN:

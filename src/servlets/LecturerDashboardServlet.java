@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import daos.DashboardDAO;
+import models.User;
 
 @WebServlet(name = "LecturerDashboardServlet", urlPatterns = { "/lecturer", "/lecturer/dashboard" })
 public class LecturerDashboardServlet extends BaseServlet {
@@ -20,6 +22,7 @@ public class LecturerDashboardServlet extends BaseServlet {
 	@Override
 	public void initServlet() {
 		// TODO Auto-generated method stub
+		DashboardDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
@@ -43,6 +46,10 @@ public class LecturerDashboardServlet extends BaseServlet {
 	}
 	
 	public void showView(HttpServletRequest request, HttpServletResponse response) {
+		User user = (User) request.getSession().getAttribute("user");
+		
+		request.setAttribute("info", DashboardDAO.getInstance().summarizeForLecturer(user.getId()));
+		
 		try {
 			forward(request, response, "/jsp/lecturer/lecturer-dashboard.jsp");
 		} catch (IOException | ServletException e) {

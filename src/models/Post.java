@@ -46,6 +46,15 @@ public class Post {
 		this.lecturerName = lecturerName;
 	}
 
+	
+	public Post(String posterUrl, int lecturer, String title, String summary, String content) {
+		this.posterUrl = posterUrl;
+		this.lecturer = lecturer;
+		this.title = title;
+		this.summary = summary;
+		this.content = content;
+	}
+
 
 
 	public String getCategory() {
