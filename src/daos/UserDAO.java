@@ -43,6 +43,25 @@ public class UserDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
+	public User getUser(final int id) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement(
+						"SELECT id, type, username, hashPassword, firstName, lastName, birthDay, address, urlAvatar, email, maxim "
+								+ "FROM users WHERE id = ? ")) {
+
+			stmt.setInt(1, id);
+
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					return fromRow(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public List<User> getUsers(String type) {
 		try (Connection con = databaseManager.getConnection();

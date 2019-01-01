@@ -74,7 +74,7 @@ public class MessageDAO extends BaseDAO{
     public boolean storeMessage(final Message message) {
         try (Connection con = databaseManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(
-                     "INSERT INTO contacts (emailOrPhone, senderName, subject, content) "
+                     "INSERT INTO messages(emailOrPhone, senderName, subject, content) "
                      + "VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, message.getEmailOrPhone());

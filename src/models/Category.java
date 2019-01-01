@@ -4,7 +4,7 @@ public class Category {
 	private int id;
 	private String title;
 	private String description;
-	
+	private int posts;
 	
 	public Category(int id, String title, String description) {
 		this.id = id;
@@ -15,6 +15,20 @@ public class Category {
 	public Category(String title, String description) {
 		this.title = title;
 		this.description = description;
+	}
+
+	public Category(String title, int posts) {
+		super();
+		this.title = title;
+		this.posts = posts;
+	}
+
+	public int getPosts() {
+		return posts;
+	}
+
+	public void setPosts(int posts) {
+		this.posts = posts;
 	}
 
 	public int getId() {

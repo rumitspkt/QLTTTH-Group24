@@ -15,96 +15,117 @@ import models.Contact;
 public class CategoryDAO extends BaseDAO {
 	private static final CategoryDAO INSTANCE = new CategoryDAO();
 
-    public static CategoryDAO getInstance() {
-        return INSTANCE;
-    }
+	public static CategoryDAO getInstance() {
+		return INSTANCE;
+	}
 
-    private CategoryDAO() {
-    }
-    
-    public Category getCategory(final int id) {
-        try (Connection con = databaseManager.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                    "SELECT id, title, description FROM categories WHERE id = ? ")) {
+	private CategoryDAO() {
+	}
 
-            stmt.setInt(1, id);
+	public Category getCategory(final int id) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con
+						.prepareStatement("SELECT id, title, description FROM categories WHERE id = ? ")) {
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return fromRow(rs);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+			stmt.setInt(1, id);
 
-    private Category fromRow(final ResultSet resultSet) throws SQLException {
-        return new Category(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("description"));
-    }
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					return fromRow(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-   
-    public List<Category> getCategories() {
-        try (Connection con = databaseManager.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                    "SELECT id, title, description " +
-                    "FROM categories ORDER BY id ASC")) {
+	private Category fromRow(final ResultSet resultSet) throws SQLException {
+		return new Category(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("description"));
+	}
+	
+	private Category fromRow1(final ResultSet resultSet) throws SQLException {
+		return new Category(resultSet.getString("title"), resultSet.getInt("posts"));
+	}
 
-            final List<Category> categories = new LinkedList<>();
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    categories.add(fromRow(rs));
-                }
-            }
+	public List<Category> getCategories() {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con
+						.prepareStatement("SELECT id, title, description " + "FROM categories ORDER BY id ASC")) {
 
-            return categories;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+			final List<Category> categories = new LinkedList<>();
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					categories.add(fromRow(rs));
+				}
+			}
 
-    public boolean storeCategory(final Category category) {
-        try (Connection con = databaseManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement(
-                     "INSERT INTO categories (title, description) "
-                     + "VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+			return categories;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
-            stmt.setString(1, category.getTitle());
-            stmt.setString(2, category.getDescription());
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-    public boolean deleteCategory(final int id) {
-    	try(Connection con = databaseManager.getConnection();
-    		PreparedStatement stmt = con.prepareStatement(
-                    "DELETE FROM categories where id = ?")) {
+	public boolean storeCategory(final Category category) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement(
+						"INSERT INTO categories (title, description) " + "VALUES (?, ?)",
+						Statement.RETURN_GENERATED_KEYS)) {
 
-           stmt.setInt(1, id);
-           return stmt.executeUpdate() > 0;
-    	} catch (SQLException e) {
-    		e.printStackTrace();
-    		return false;
-    	}
-    }
-    
-    public boolean updateCategory(final int id, final String title, final String description) {
-    	try(Connection con = databaseManager.getConnection();
-        		PreparedStatement stmt = con.prepareStatement(
-                        "UPDATE categories SET title = ?, description = ? where id = ?")) {
+			stmt.setString(1, category.getTitle());
+			stmt.setString(2, category.getDescription());
+			return stmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-               stmt.setString(1, title);
-               stmt.setString(2, description);
-               stmt.setInt(3, id);
-               return stmt.executeUpdate() > 0;
-        	} catch (SQLException e) {
-        		e.printStackTrace();
-        		return false;
-        	}
-    }
+	public boolean deleteCategory(final int id) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement("DELETE FROM categories where id = ?")) {
+
+			stmt.setInt(1, id);
+			return stmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean updateCategory(final int id, final String title, final String description) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con
+						.prepareStatement("UPDATE categories SET title = ?, description = ? where id = ?")) {
+
+			stmt.setString(1, title);
+			stmt.setString(2, description);
+			stmt.setInt(3, id);
+			return stmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public List<Category> getCategoriesWithNumberOfPosts() {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement(
+						"select categories.title, COUNT(classificationOfPosts.id) as posts from classificationOfPosts join categories on classificationOfPosts.category = categories.id GROUP BY categories.id")) {
+
+			final List<Category> categories = new LinkedList<>();
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					categories.add(fromRow1(rs));
+				}
+			}
+
+			return categories;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

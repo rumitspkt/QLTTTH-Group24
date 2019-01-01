@@ -7,12 +7,12 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="images/favicon.PNG" type="image/png">
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.PNG" type="image/png">
 
 <%@ include file="/jsp/fragments/page-declare-top.jsp"%>
 
 <!-- custom css -->
-<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/custom.css">
 </head>
 <body>
 
@@ -66,16 +66,16 @@
 					</div>
 				</div>
 				<div class="col-lg-9">
-					<form class="row contact_form" action="contact_process.php"
-						method="post" id="contactForm" novalidate="novalidate">
+					<form class="row" action="${pageContext.request.contextPath}/contact/new" 
+						method="post" >
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="text" class="form-control" id="name" name="name"
+								<input type="text" class="form-control" id="name" name="senderName"
 									placeholder="Enter your name">
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" id="email" name="email"
-									placeholder="Enter email address">
+								<input type="text" class="form-control" id="email" name="emailOrPhone"
+									placeholder="Enter email address or phone number">
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control" id="subject"
@@ -84,7 +84,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<textarea class="form-control" name="message" id="message"
+								<textarea class="form-control" name="content" id="message"
 									rows="1" placeholder="Enter Message"></textarea>
 							</div>
 						</div>
@@ -112,13 +112,14 @@
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<%@ include file="/jsp/fragments/page-declare-bottom.jsp"%>
 	<!-- contact js -->
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/contact.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/contact.js"></script>
 	<!--gmaps Js-->
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="js/gmaps.min.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="${pageContext.request.contextPath}/js/gmaps.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/theme.js"></script>
+	<%@ include file="/jsp/fragments/toastr.jsp"%>
 </body>
 </html>

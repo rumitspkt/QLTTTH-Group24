@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import commons.TypePage;
+import daos.PageDAO;
 
 @WebServlet(name = "PageAboutServlet", urlPatterns = { "/about" })
 public class PageAboutServlet extends BaseServlet {
@@ -20,6 +22,7 @@ public class PageAboutServlet extends BaseServlet {
 	@Override
 	public void initServlet() {
 		// TODO Auto-generated method stub
+		PageDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
@@ -42,6 +45,8 @@ public class PageAboutServlet extends BaseServlet {
 	}
 	
 	public void showView(HttpServletRequest request, HttpServletResponse response) {
+		
+		request.setAttribute("page", PageDAO.getInstance().getPage(TypePage.ABOUT));
 		try {
 			forward(request, response, "/jsp/page-about.jsp");
 		} catch (IOException | ServletException e) {

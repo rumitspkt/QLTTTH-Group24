@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import commons.TypePage;
+import daos.PageDAO;
 
 @WebServlet(name = "PageEventServlet", urlPatterns = { "/event" })
 public class PageEventServlet extends BaseServlet {
@@ -20,6 +22,7 @@ public class PageEventServlet extends BaseServlet {
 	@Override
 	public void initServlet() {
 		// TODO Auto-generated method stub
+		PageDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
@@ -42,6 +45,9 @@ public class PageEventServlet extends BaseServlet {
 	}
 	
 	public void showView(HttpServletRequest request, HttpServletResponse response) {
+		
+		request.setAttribute("page", PageDAO.getInstance().getPage(TypePage.EVENT));
+		
 		try {
 			forward(request, response, "/jsp/page-event.jsp");
 		} catch (IOException | ServletException e) {

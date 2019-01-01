@@ -22,6 +22,14 @@ public class Message {
 		this.content = content;
 		this.isRead = isRead;
 	}
+	
+	public Message(String emailOrPhone, String senderName, String subject, String content) {
+		super();
+		this.emailOrPhone = emailOrPhone;
+		this.senderName = senderName;
+		this.subject = subject;
+		this.content = content;
+	}
 	public int getId() {
 		return id;
 	}

@@ -42,5 +42,6 @@ public class ErrorCodes {
 	public static final String YOU_ARE_NOT_STUDENT = "YOU_ARE_NOT_STUDENT"; 
 	public static final String ENROLL_COURSE_ERROR = "ENROLL_COURSE_ERROR"; 
 	public static final String YOU_ALREADY_EXIST_IN_THIS_COURSE = "YOU_ALREADY_EXIST_IN_THIS_COURSE"; 
+	public static final String SEND_MESSAGE_ERROR = "SEND_MESSAGE_ERROR"; 
 	
 }

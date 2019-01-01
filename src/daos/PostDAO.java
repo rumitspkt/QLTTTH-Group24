@@ -40,6 +40,24 @@ public class PostDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
+	public Post getPostDetail(final int id) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement(
+						"SELECT posts.id,posts.posterUrl,posts.lecturer,posts.date,posts.views,posts.title,posts.summary,posts.content,posts.STATUS,categories.title AS category,CONCAT(users.firstName,' ',users.lastName) AS lecturerName FROM posts JOIN classificationOfPosts ON posts.id=classificationOfPosts.post JOIN categories ON classificationOfPosts.category=categories.id JOIN users ON posts.lecturer=users.id WHERE posts.id=?")) {
+
+			stmt.setInt(1, id);
+
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					return fromRowDetail(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	private Post fromRow(final ResultSet resultSet) throws SQLException {
 		return new Post(resultSet.getInt("id"), resultSet.getString("posterUrl"), resultSet.getInt("lecturer"),
