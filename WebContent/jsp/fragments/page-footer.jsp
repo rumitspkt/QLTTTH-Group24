@@ -70,7 +70,7 @@
 				<script>
 					document.write(new Date().getFullYear());
 				</script>
-				All rights reserved | Power by <a href="index.html" target="_blank">Techacademy</a>
+				All rights reserved | Power by <a href="${pageContext.request.contextPath}/" target="_blank">Techacademy</a>
 				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 			</p>
 			<div class="col-lg-4 col-md-4 footer-social">

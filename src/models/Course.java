@@ -18,6 +18,7 @@ public class Course {
 	private String lecturerName;
 	private String category;
 	private int categoryId;
+	private String posterUrl;
 	public Course(int id, String title, String shortDescription, String objective, String eligibility, String outline,
 			String schedules, int totalSeat, int availableSeat, float fee, int lecturer, Timestamp date) {
 		this.id = id;
@@ -36,7 +37,7 @@ public class Course {
 	
 	public Course(int id, String title, String shortDescription, String objective, String eligibility, String outline,
 			String schedules, int totalSeat, int availableSeat, float fee, int lecturer, Timestamp date,
-			String lecturerName, String category, int categoryId) {
+			String lecturerName, String category, int categoryId, String posterUrl) {
 		this.id = id;
 		this.title = title;
 		this.shortDescription = shortDescription;
@@ -52,6 +53,7 @@ public class Course {
 		this.lecturerName = lecturerName;
 		this.category = category;
 		this.categoryId = categoryId;
+		this.posterUrl = posterUrl;
 	}
 	
 	public Course(String title, String shortDescription, String objective, String eligibility, String outline,
@@ -82,6 +84,14 @@ public class Course {
 	}
 	
 	
+
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	}
 
 	public int getCategoryId() {
 		return categoryId;

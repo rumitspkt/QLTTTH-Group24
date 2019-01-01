@@ -27,4 +27,5 @@ public class SuccessCodes {
 	public static final String CREATE_POST_SUCCESS = "CREATE_POST_SUCCESS";
 	public static final String UPDATE_SCORE_SUCCESS = "UPDATE_SCORE_SUCCESS";
 	public static final String APPROVE_CERTIFICATE_SUCCESS = "APPROVE_CERTIFICATE_SUCCESS";
+	public static final String ENROLL_COURSE_SUCCESS = "ENROLL_COURSE_SUCCESS";
 }

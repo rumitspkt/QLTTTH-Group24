@@ -40,6 +40,25 @@ public class EnrollmentDAO extends BaseDAO{
         }
         return null;
     }
+    
+    public Enrollment getEnrollment(final int student, int course) {
+        try (Connection con = databaseManager.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                    "SELECT id, course, student, enrolledDate, certificate, receivedCertificateDate FROM enrollments WHERE student = ? and course = ? ")) {
+
+            stmt.setInt(1, student);
+            stmt.setInt(2, course);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return fromRow(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     private Enrollment fromRow(final ResultSet resultSet) throws SQLException {
         return new Enrollment(resultSet.getInt("id"),
@@ -52,19 +71,24 @@ public class EnrollmentDAO extends BaseDAO{
     }
 
    
-    public boolean storeEnrollment(final Enrollment enrollment) {
+    public int storeEnrollment(final Enrollment enrollment) {
         try (Connection con = databaseManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(
-                     "INSERT INTO enrollments (course, student, enrolledDate) "
-                     + "VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                     "INSERT INTO enrollments (course, student) "
+                     + "VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, enrollment.getCourse());
             stmt.setInt(2, enrollment.getStudent());
-            stmt.setTimestamp(3, enrollment.getEnrolledDate());
-            return stmt.executeUpdate() > 0;
+            stmt.executeUpdate();
+            int key = -1;
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				key = generatedKeys.getInt(1);
+			}
+			return key;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
     

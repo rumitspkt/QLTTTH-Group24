@@ -77,6 +77,29 @@ public class PostDAO extends BaseDAO {
 			return null;
 		}
 	}
+	
+	public List<Post> getLatestPosts() {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement(
+						"SELECT posts.id,posts.posterUrl,posts.lecturer,posts.date,posts.views,posts.title,posts.summary,posts.content,posts.STATUS,categories.title AS category,CONCAT(users.firstName,' ',users.lastName) AS lecturerName "
+						+ "FROM posts "
+						+ "JOIN classificationOfPosts ON posts.id=classificationOfPosts.post "
+						+ "JOIN categories ON classificationOfPosts.category=categories.id "
+						+ "JOIN users ON posts.lecturer=users.id where posts.status='ACCEPTED' order by date DESC limit 4")) {
+
+			final List<Post> posts = new LinkedList<>();
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					posts.add(fromRowDetail(rs));
+				}
+			}
+
+			return posts;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public List<Post> getPostsByLecturer(int lecturer) {
 		try (Connection con = databaseManager.getConnection();

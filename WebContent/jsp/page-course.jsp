@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,12 +8,12 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="images/favicon.PNG" type="image/png">
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.PNG" type="image/png">
 
 <%@ include file="/jsp/fragments/page-declare-top.jsp"%>
 
 <!-- custom css -->
-<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/custom.css">
 </head>
 <body>
 
@@ -41,90 +42,102 @@
 				<h2>Categories</h2>
 				<p>All</p>
 			</div>
-			<div class="row courses_inner">
-				<div class="col-lg-9">
-					<div class="grid_inner">
-						<div class="grid_item wd55">
-							<div class="courses_item">
-								<img class="center-cropped"
-									src="images/courses/course-android.png" alt="">
-								<div class="hover_text">
-									<a class="cat" href="#">Android</a> <a
-										href="course-details.html"><h4>Android Programing
-											Basic</h4></a>
-									<ul class="list">
-										<li><a href="#"><i class="lnr lnr-users"></i> 100</a></li>
-										<li><a href="#"><i class="lnr lnr-bubble"></i> 35</a></li>
-										<li><a href="#"><i class="lnr lnr-user"></i> D. Alex</a></li>
-									</ul>
+			<c:forEach items="${courses}" var="course" step="5" varStatus="loop">
+				<div class="row courses_inner mb-2">
+					<div class="col-lg-9">
+						<div class="grid_inner">
+							<div class="grid_item wd55">
+								<div class="courses_item">
+									<img class="center-cropped"
+										src="${courses[loop.index].posterUrl}"
+										alt="${courses[loop.index].title}">
+									<div class="hover_text">
+										ƒ <a class="cat" href="#">Hot</a> <a
+											href="${pageContext.request.contextPath}/course?id=${courses[loop.index].id}"><h4>${courses[loop.index].title}</h4></a>
+										<ul class="list">
+											<li><a href="#"><i class="lnr lnr-users"></i>
+													${courses[loop.index].availableSeat}</a></li>
+											<li><a href="#"><i class="lnr lnr-bubble"></i> 0</a></li>
+											<li><a href="#"><i class="lnr lnr-user"></i>
+													${courses[loop.index].lecturerName}</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="grid_item wd44">
-							<div class="courses_item">
-								<img class="center-cropped" src="images/courses/course-ios.png"
-									alt="">
-								<div class="hover_text">
-									<a class="cat" href="#">IOS</a> <a href="#"><h4>Introduce
-											To Apple Developer</h4></a>
-									<ul class="list">
-										<li><a href="#"><i class="lnr lnr-users"></i> 355</a></li>
-										<li><a href="#"><i class="lnr lnr-bubble"></i> 35</a></li>
-										<li><a href="#"><i class="lnr lnr-user"></i> T.
-												Robert</a></li>
-									</ul>
+							<div class="grid_item wd44">
+								<div class="courses_item">
+									<img class="center-cropped"
+										src="${courses[loop.index + 1].posterUrl}"
+										alt="${courses[loop.index + 1].title}">
+									<div class="hover_text">
+										<a class="cat" href="#">Hot</a> <a
+											href="${pageContext.request.contextPath}/course?id=${courses[loop.index + 1].id}"><h4>${courses[loop.index + 1].title}</h4></a>
+										<ul class="list">
+											<li><a href="#"><i class="lnr lnr-users"></i>
+													${courses[loop.index + 1].availableSeat}</a></li>
+											<li><a href="#"><i class="lnr lnr-bubble"></i> 0</a></li>
+											<li><a href="#"><i class="lnr lnr-user"></i>
+													${courses[loop.index + 1].lecturerName}</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="grid_item wd44">
-							<div class="courses_item">
-								<img class="center-cropped" src="images/courses/course-jsp.png"
-									alt="">
-								<div class="hover_text">
-									<a class="cat" href="#">Java</a> <a href="#"><h4>Stable
-											Web Application With JSP</h4></a>
-									<ul class="list">
-										<li><a href="#"><i class="lnr lnr-users"></i> 25</a></li>
-										<li><a href="#"><i class="lnr lnr-bubble"></i> 5</a></li>
-										<li><a href="#"><i class="lnr lnr-user"></i> V. Rum</a></li>
-									</ul>
+							<div class="grid_item wd44">
+								<div class="courses_item">
+									<img class="center-cropped"
+										src="${courses[loop.index + 2].posterUrl}"
+										alt="${courses[loop.index + 2].title}">
+									<div class="hover_text">
+										<a class="cat" href="#">Hot</a> <a href="${pageContext.request.contextPath}/course?id=${courses[loop.index + 2].id}"><h4>${courses[loop.index + 2].title}</h4></a>
+										<ul class="list">
+											<li><a href="#"><i class="lnr lnr-users"></i>
+													${courses[loop.index + 2].availableSeat}</a></li>
+											<li><a href="#"><i class="lnr lnr-bubble"></i> 0</a></li>
+											<li><a href="#"><i class="lnr lnr-user"></i>
+													${courses[loop.index + 2].lecturerName}</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="grid_item wd55">
-							<div class="courses_item">
-								<img class="center-cropped"
-									src="images/courses/course-design.jpg" alt="">
-								<div class="hover_text">
-									<a class="cat" href="#">Design</a> <a href="#"><h4>Advanced
-											UX/UI</h4></a>
-									<ul class="list">
-										<li><a href="#"><i class="lnr lnr-users"></i> 155</a></li>
-										<li><a href="#"><i class="lnr lnr-bubble"></i> 25</a></li>
-										<li><a href="#"><i class="lnr lnr-user"></i> T. Hieu</a></li>
-									</ul>
+							<div class="grid_item wd55">
+								<div class="courses_item">
+									<img class="center-cropped"
+										src="${courses[loop.index + 3].posterUrl}"
+										alt="${courses[loop.index + 3].title}">
+									<div class="hover_text">
+										<a class="cat" href="#">Hot</a> <a href="${pageContext.request.contextPath}/course?id=${courses[loop.index + 3].id}"><h4>${courses[loop.index + 3].title}</h4></a>
+										<ul class="list">
+											<li><a href="#"><i class="lnr lnr-users"></i>
+													${courses[loop.index + 3].availableSeat}</a></li>
+											<li><a href="#"><i class="lnr lnr-bubble"></i> 0</a></li>
+											<li><a href="#"><i class="lnr lnr-user"></i>
+													${courses[loop.index + 3].lecturerName}</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3">
-					<div class="course_item">
-						<img class="center-cropped"
-							src="images/courses/course-ethereum.jpeg" alt="">
-						<div class="hover_text">
-							<a class="cat" href="#">Blockchain</a> <a href="#"><h4>Ethereum
-									For Beginner</h4></a>
-							<ul class="list">
-								<li><a href="#"><i class="lnr lnr-users"></i> 100</a></li>
-								<li><a href="#"><i class="lnr lnr-bubble"></i> 10</a></li>
-								<li><a href="#"><i class="lnr lnr-user"></i> T. Nguyen</a></li>
-							</ul>
+					<div class="col-lg-3">
+						<div class="course_item">
+							<img class="center-cropped"
+								src="${courses[loop.index + 4].posterUrl}"
+								alt="${courses[loop.index + 4].title}">
+							<div class="hover_text">
+								<a class="cat" href="#">Hot</a> <a href="${pageContext.request.contextPath}/course?id=${courses[loop.index + 4].id}"><h4>${courses[loop.index + 4].title}</h4></a>
+								<ul class="list">
+									<li><a href="#"><i class="lnr lnr-users"></i>
+											${courses[loop.index + 4].availableSeat}</a></li>
+									<li><a href="#"><i class="lnr lnr-bubble"></i> 0</a></li>
+									<li><a href="#"><i class="lnr lnr-user"></i>
+											${courses[loop.index + 4].lecturerName}</a></li>
+								</ul>
+							</div>
 						</div>
-					</div>
 
+					</div>
 				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</section>
 	<!--================End Courses Area =================-->
@@ -141,5 +154,6 @@
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<%@ include file="/jsp/fragments/page-declare-bottom.jsp"%>
+	<%@ include file="/jsp/fragments/toastr.jsp"%>
 </body>
 </html>

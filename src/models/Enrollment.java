@@ -26,6 +26,12 @@ public class Enrollment {
 		this.certificate = certificate;
 		this.receivedCertificateDate = receivedCertificateDate;
 	}
+	
+	public Enrollment(int course, int student) {
+		super();
+		this.course = course;
+		this.student = student;
+	}
 	public int getId() {
 		return id;
 	}

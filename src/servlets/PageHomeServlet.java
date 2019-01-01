@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bases.BaseServlet;
+import commons.TypeUser;
+import daos.CourseDAO;
+import daos.PostDAO;
+import daos.UserDAO;
 import models.User;
 
 public class PageHomeServlet extends BaseServlet {
@@ -20,6 +24,9 @@ public class PageHomeServlet extends BaseServlet {
 	@Override
 	public void initServlet() {
 		// TODO Auto-generated method stub
+		CourseDAO.getInstance().initDatabaseManager(getServletContext());
+		UserDAO.getInstance().initDatabaseManager(getServletContext());
+		PostDAO.getInstance().initDatabaseManager(getServletContext());
 	}
 
 	@Override
@@ -35,6 +42,9 @@ public class PageHomeServlet extends BaseServlet {
 	}
 
 	public void showView(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("courses", CourseDAO.getInstance().getPopularCourses());
+		request.setAttribute("lecturers", UserDAO.getInstance().getUsers(TypeUser.LECTURER));
+		request.setAttribute("posts", PostDAO.getInstance().getLatestPosts());
 		try {
 			forward(request, response, "/jsp/page-home.jsp");
 		} catch (IOException | ServletException e) {

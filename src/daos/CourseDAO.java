@@ -28,7 +28,7 @@ public class CourseDAO extends BaseDAO {
 	public Course getCourse(final int id) {
 		try (Connection con = databaseManager.getConnection();
 				PreparedStatement stmt = con.prepareStatement(
-						"SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category, categories.id AS categoryId "
+						"SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category, categories.id AS categoryId, posterUrl "
 								+ "FROM courses " + "JOIN users ON lecturer=users.id "
 								+ "JOIN classificationOfCourses ON classificationOfCourses.course=courses.id "
 								+ "JOIN categories ON classificationOfCourses.category=categories.id "
@@ -46,6 +46,7 @@ public class CourseDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
 
 	private Course fromRow(final ResultSet resultSet) throws SQLException {
 		return new Course(resultSet.getInt("id"), resultSet.getString("title"), resultSet.getString("shortDescription"),
@@ -59,16 +60,35 @@ public class CourseDAO extends BaseDAO {
 				resultSet.getString("objective"), resultSet.getString("eligibility"), resultSet.getString("outline"),
 				resultSet.getString("schedules"), resultSet.getInt("totalSeat"), resultSet.getInt("availableSeat"),
 				resultSet.getFloat("fee"), resultSet.getInt("lecturer"), resultSet.getTimestamp("date"),
-				resultSet.getString("lecturerName"), resultSet.getString("category"), resultSet.getInt("categoryId"));
+				resultSet.getString("lecturerName"), resultSet.getString("category"), resultSet.getInt("categoryId"), resultSet.getString("posterUrl"));
 	}
 
 	public List<Course> getCourses() {
 		try (Connection con = databaseManager.getConnection();
 				PreparedStatement stmt = con.prepareStatement(
-						"SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category, categories.id AS categoryId "
+						"SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category, categories.id AS categoryId, posterUrl "
 								+ "FROM courses " + "JOIN users ON lecturer=users.id "
 								+ "JOIN classificationOfCourses ON classificationOfCourses.course=courses.id "
 								+ "JOIN categories ON classificationOfCourses.category=categories.id ORDER BY id ASC")) {
+
+			final List<Course> courses = new LinkedList<>();
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					courses.add(fromRowDetail(rs));
+				}
+			}
+
+			return courses;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Course> getPopularCourses() {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement(
+						"SELECT courses.id,courses.title,shortDescription,objective,eligibility,outline,schedules,totalSeat,availableSeat,fee,lecturer,date,CONCAT(users.firstName,' ',users.lastName) AS lecturerName,categories.title AS category,categories.id AS categoryId, posterUrl FROM courses JOIN users ON lecturer=users.id JOIN classificationOfCourses ON classificationOfCourses.course=courses.id JOIN categories ON classificationOfCourses.category=categories.id ORDER BY availableSeat DESC LIMIT 5")) {
 
 			final List<Course> courses = new LinkedList<>();
 			try (ResultSet rs = stmt.executeQuery()) {
@@ -214,6 +234,18 @@ public class CourseDAO extends BaseDAO {
 
 			stmt.setInt(1, availableSeat);
 			stmt.setInt(2, id);
+			return stmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean updateSeatCourse(final int id) {
+		try (Connection con = databaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement("UPDATE courses SET availableSeat = availableSeat + 1 where id = ?")) {
+
+			stmt.setInt(1, id);
 			return stmt.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();

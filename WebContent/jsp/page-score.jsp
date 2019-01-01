@@ -40,13 +40,30 @@
 			<div class="mb-3">
 				<h3 class="mb-20 title_color">Select Course</h3>
 				<div class="default-select" id="default-select">
-					<select>
-						<option value="1">Android Programing Basic</option>
-						<option value="1">Spanish</option>
-						<option value="1">Arabic</option>
-						<option value="1">Portuguise</option>
-						<option value="1">Bengali</option>
-					</select>
+					<form action="${pageContext.request.contextPath}/score"
+						method="get">
+						<select name="course" onchange="this.form.submit()">
+							<c:choose>
+								<c:when test="${selected == 0}">
+									<option value="0" selected="selected">Courses</option>
+								</c:when>
+								<c:otherwise>
+									<option value="0">Courses</option>
+								</c:otherwise>
+							</c:choose>
+
+							<c:forEach items="${courses}" var="course">
+								<c:choose>
+									<c:when test="${course.id == selected}">
+										<option selected="selected" value="${course.id}">${course.title}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${course.id}">${course.title}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</select>
+					</form>
 				</div>
 			</div>
 			<div class="row about_inner pl-4">
@@ -56,53 +73,20 @@
 							<th>#</th>
 							<th>ID</th>
 							<th>Full name</th>
-							<th>Score 1</th>
-							<th>Score 2</th>
+							<th>First Score</th>
+							<th>Second Score</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>215489685</td>
-							<td>Rum Nguyen</td>
-							<td>8.5</td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>215489685</td>
-							<td>Rum Nguyen</td>
-							<td>8.5</td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>215489685</td>
-							<td>Rum Nguyen</td>
-							<td>8.5</td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>215489685</td>
-							<td>Rum Nguyen</td>
-							<td>8.5</td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>215489685</td>
-							<td>Rum Nguyen</td>
-							<td>8.5</td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>215489685</td>
-							<td>Rum Nguyen</td>
-							<td>8.5</td>
-							<td>7</td>
-						</tr>
+						<c:forEach items="${scores}" var="score" varStatus="loop">
+							<tr>
+								<td>${loop.index + 1}</td>
+								<td>${score.id}</td>
+								<td>${score.firstName} ${score.lastName}</td>
+								<td>${score.firstScore}</td>
+								<td>${score.secondScore}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
